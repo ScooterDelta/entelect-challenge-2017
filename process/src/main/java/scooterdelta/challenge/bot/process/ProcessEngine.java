@@ -13,7 +13,6 @@ public class ProcessEngine implements Runnable {
     private final File workingDirectory;
     private final String playerKey;
 
-
     @Inject
     public ProcessEngine(final File workingDirectory,
                          final String playerKey) {
