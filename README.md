@@ -5,4 +5,4 @@
 
 ## Set up:
 - Run from bot host (C# Entelect Challenge game engine), example config:
-<pre>-b "..\..\..\..\..\Sample Bots\C#\SampleBot" \path\to\entelect-challenge --pretty -l \path\to\challenge-logs</pre>
+```-b "..\..\..\..\..\Sample Bots\C#\SampleBot" \path\to\entelect-challenge --pretty -l \path\to\challenge-logs```
