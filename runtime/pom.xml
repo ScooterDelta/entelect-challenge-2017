@@ -23,6 +23,13 @@
             <artifactId>process</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--General/Internal:-->
+        <dependency>
+            <groupId>scooterdelta.challenge.bot</groupId>
+            <artifactId>logging</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

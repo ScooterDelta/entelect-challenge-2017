@@ -14,6 +14,7 @@
         <module>logging</module>
         <module>process</module>
         <module>runtime</module>
+        <module>common</module>
     </modules>
 
     <properties>
@@ -63,6 +64,11 @@
                 <artifactId>dagger-compiler</artifactId>
                 <version>${square.dagger.version}</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
 
             <!--General/Internal:-->
