@@ -1,6 +1,6 @@
 package scooterdelta.challenge.bot.common.state;
 
-import scooterdelta.challenge.bot.common.domain.OpponentCell;
+import scooterdelta.challenge.bot.common.state.domain.OpponentCell;
 
 import java.util.ArrayList;
 import java.util.Objects;

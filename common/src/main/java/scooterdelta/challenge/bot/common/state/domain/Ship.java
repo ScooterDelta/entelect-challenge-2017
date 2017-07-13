@@ -1,4 +1,4 @@
-package scooterdelta.challenge.bot.common.domain;
+package scooterdelta.challenge.bot.common.state.domain;
 
 import scooterdelta.challenge.bot.common.lookup.ShipType;
 

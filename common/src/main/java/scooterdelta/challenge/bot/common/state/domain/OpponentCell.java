@@ -1,4 +1,4 @@
-package scooterdelta.challenge.bot.common.domain;
+package scooterdelta.challenge.bot.common.state.domain;
 
 import java.util.Objects;
 

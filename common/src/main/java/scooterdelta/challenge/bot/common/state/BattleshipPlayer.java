@@ -1,6 +1,6 @@
 package scooterdelta.challenge.bot.common.state;
 
-import scooterdelta.challenge.bot.common.domain.Ship;
+import scooterdelta.challenge.bot.common.state.domain.Ship;
 
 import java.util.ArrayList;
 import java.util.Objects;
