@@ -4,5 +4,5 @@
     "NickName" :"Ant",
     "BotType": 1,
     "ProjectLocation" : "",
-    "RunFile" : "target\\sample-bot-1.0-SNAPSHOT-jar-with-dependencies.jar"
+    "RunFile" : "runtime\\target\\runtime-1.0-SNAPSHOT-jar-with-dependencies.jar"
 }
