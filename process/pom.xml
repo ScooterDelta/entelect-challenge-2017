@@ -18,11 +18,19 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>scooterdelta.challenge.bot</groupId>
+            <artifactId>logging-test</artifactId>
+        </dependency>
 
         <!--Dependency:-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>com.squareup.dagger</groupId>

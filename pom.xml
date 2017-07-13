@@ -15,6 +15,7 @@
         <module>process</module>
         <module>runtime</module>
         <module>common</module>
+        <module>logging-test</module>
     </modules>
 
     <properties>
@@ -28,6 +29,7 @@
 
         <!--Dependencies:-->
         <google.gson.version>2.8.0</google.gson.version>
+        <google.guava.version>22.0</google.guava.version>
         <square.dagger.version>1.2.5</square.dagger.version>
 
         <!--Logging:-->
@@ -55,6 +57,11 @@
                 <version>${google.gson.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google.guava.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.squareup.dagger</groupId>
                 <artifactId>dagger</artifactId>
                 <version>${square.dagger.version}</version>
@@ -76,6 +83,12 @@
                 <groupId>scooterdelta.challenge.bot</groupId>
                 <artifactId>logging</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>scooterdelta.challenge.bot</groupId>
+                <artifactId>logging-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.process.module;
 
+import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import scooterdelta.challenge.bot.process.ProcessEngine;
@@ -27,6 +28,11 @@ public class ProcessModule {
     @Provides
     String providePlayerKey() {
         return playerKey;
+    }
+
+    @Provides
+    Gson provideGson() {
+        return new Gson();
     }
 
 }
