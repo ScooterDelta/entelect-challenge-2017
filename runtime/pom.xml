@@ -15,6 +15,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <main.class>scooterdelta.challenge.bot.ChallengeApplication</main.class>
     </properties>
 
     <dependencies>
@@ -34,6 +36,10 @@
             <groupId>com.google.dagger</groupId>
             <artifactId>dagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -45,7 +51,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>scooterdelta.challenge.bot.ChallengeApplication</mainClass>
+                            <mainClass>${main.class}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -59,7 +65,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>scooterdelta.challenge.bot.ChallengeApplication</mainClass>
+                            <mainClass>${main.class}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -71,6 +77,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
