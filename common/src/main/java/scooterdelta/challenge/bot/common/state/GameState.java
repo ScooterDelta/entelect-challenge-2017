@@ -1,15 +1,24 @@
 package scooterdelta.challenge.bot.common.state;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class GameState {
 
+    @SerializedName("PlayerMap")
     private PlayerMap playerMap;
+    @SerializedName("OpponentMap")
     private OpponentMap opponentMap;
+    @SerializedName("GameVersion")
     private String gameVersion;
+    @SerializedName("GameLevel")
     private int gameLevel;
+    @SerializedName("Round")
     private int round;
+    @SerializedName("MapDimension")
     private int mapDimension;
+    @SerializedName("Phase")
     private int phase;
 
     public PlayerMap getPlayerMap() {

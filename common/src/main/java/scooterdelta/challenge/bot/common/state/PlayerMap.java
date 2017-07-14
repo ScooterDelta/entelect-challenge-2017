@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.state.domain.Cell;
 
 import java.util.ArrayList;
@@ -7,9 +8,13 @@ import java.util.Objects;
 
 public class PlayerMap {
 
+    @SerializedName("Owner")
     private BattleshipPlayer owner;
+    @SerializedName("Cells")
     private ArrayList<Cell> cells;
+    @SerializedName("MapWidth")
     private int mapWidth;
+    @SerializedName("MapHeight")
     private int mapHeight;
 
     public BattleshipPlayer getOwner() {

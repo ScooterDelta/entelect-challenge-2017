@@ -11,11 +11,10 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>logging</module>
         <module>process</module>
         <module>runtime</module>
         <module>common</module>
-        <module>logging-test</module>
+        <module>logging</module>
     </modules>
 
     <properties>
@@ -80,12 +79,12 @@
 
             <!--General/Internal:-->
             <dependency>
-                <groupId>scooterdelta.challenge.bot</groupId>
-                <artifactId>logging</artifactId>
+                <groupId>scooterdelta.challenge.bot.logging</groupId>
+                <artifactId>logging-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>scooterdelta.challenge.bot</groupId>
+                <groupId>scooterdelta.challenge.bot.logging</groupId>
                 <artifactId>logging-test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>

@@ -1,10 +1,14 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class Point {
 
+    @SerializedName("Y")
     private int y;
+    @SerializedName("X")
     private int x;
 
     public Point(final int x, final int y) {

@@ -1,10 +1,14 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public abstract class AbstractCell {
 
+    @SerializedName("X")
     private int x;
+    @SerializedName("Y")
     private int y;
 
     public int getX() {

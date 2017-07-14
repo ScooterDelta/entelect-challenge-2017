@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.state.domain.Ship;
 
 import java.util.ArrayList;
@@ -7,16 +8,27 @@ import java.util.Objects;
 
 public class BattleshipPlayer {
 
+    @SerializedName("FailedFirstRoundCommands")
     private int failedFirstRoundCommands;
+    @SerializedName("Name")
     private String name;
+    @SerializedName("Ships")
     private ArrayList<Ship> ships;
+    @SerializedName("Points")
     private int points;
+    @SerializedName("Energy")
     private int energy;
+    @SerializedName("Killed")
     private boolean killed;
+    @SerializedName("IsWinner")
     private boolean isWinner;
+    @SerializedName("ShotsFired")
     private int shotsFired;
+    @SerializedName("ShotsHit")
     private int shotsHit;
+    @SerializedName("ShipsRemaining")
     private int shipsRemaining;
+    @SerializedName("Key")
     private char key;
 
     public int getFailedFirstRoundCommands() {

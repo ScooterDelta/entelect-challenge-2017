@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.lookup.ShipType;
 
 import java.util.ArrayList;
@@ -7,11 +8,16 @@ import java.util.Objects;
 
 public class Ship {
 
+    @SerializedName("Destroyed")
     private boolean destroyed;
+    @SerializedName("Placed")
     private boolean placed;
+    @SerializedName("ShipType")
     private ShipType shipType;
 
+    @SerializedName("Weapons")
     private ArrayList<Weapon> weapons;
+    @SerializedName("Cells")
     private ArrayList<Cell> cells;
 
     public boolean isDestroyed() {

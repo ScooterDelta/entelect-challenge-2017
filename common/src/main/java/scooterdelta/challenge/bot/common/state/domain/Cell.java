@@ -1,10 +1,14 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class Cell extends AbstractCell {
 
+    @SerializedName("Occupied")
     private boolean occupied;
+    @SerializedName("Hit")
     private boolean hit;
 
     public boolean isOccupied() {

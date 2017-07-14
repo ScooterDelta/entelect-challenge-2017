@@ -1,11 +1,13 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.lookup.WeaponType;
 
 import java.util.Objects;
 
 public class Weapon {
 
+    @SerializedName("WeaponType")
     private WeaponType weaponType;
 
     public WeaponType getWeaponType() {

@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.state.domain.OpponentCell;
 
 import java.util.ArrayList;
@@ -7,10 +8,15 @@ import java.util.Objects;
 
 public class OpponentMap {
 
+    @SerializedName("Alive")
     private boolean alive;
+    @SerializedName("Points")
     private int points;
+    @SerializedName("Name")
     private String name;
+    @SerializedName("Ships")
     private ArrayList<OpponentShip> ships;
+    @SerializedName("Cells")
     private ArrayList<OpponentCell> cells;
 
     public boolean isAlive() {

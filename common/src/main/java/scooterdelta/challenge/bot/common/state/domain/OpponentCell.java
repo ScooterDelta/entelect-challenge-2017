@@ -1,10 +1,14 @@
 package scooterdelta.challenge.bot.common.state.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class OpponentCell extends AbstractCell {
 
+    @SerializedName("Damaged")
     private boolean damaged;
+    @SerializedName("Missed")
     private boolean missed;
 
     public boolean isDamaged() {

@@ -1,12 +1,15 @@
 package scooterdelta.challenge.bot.common.state;
 
+import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.lookup.ShipType;
 
 import java.util.Objects;
 
 public class OpponentShip {
 
+    @SerializedName("Destroyed")
     private boolean destroyed;
+    @SerializedName("ShipType")
     private ShipType shipType;
 
     public boolean isDestroyed() {
