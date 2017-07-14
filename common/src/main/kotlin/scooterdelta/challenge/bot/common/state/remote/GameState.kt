@@ -1,7 +1,11 @@
 package scooterdelta.challenge.bot.common.state.remote
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(
+        value = *arrayOf("Player1Map", "Player2Map")
+)
 data class GameState(
 
         @JsonProperty("PlayerMap")
