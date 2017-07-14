@@ -4,14 +4,11 @@ import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import scooterdelta.challenge.bot.common.local.FileState;
-import scooterdelta.challenge.bot.process.ProcessEngine;
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer;
 
 import java.io.File;
 
-@Module(
-        injects = ProcessEngine.class
-)
+@Module
 public class ProcessModule {
 
     private final File workingDirectory;

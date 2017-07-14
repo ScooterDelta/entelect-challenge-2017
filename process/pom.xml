@@ -34,13 +34,8 @@
             <artifactId>guava</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.squareup.dagger</groupId>
+            <groupId>com.google.dagger</groupId>
             <artifactId>dagger</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.dagger</groupId>
-            <artifactId>dagger-compiler</artifactId>
-            <version>${square.dagger.version}</version>
         </dependency>
 
         <!--General/Internal:-->

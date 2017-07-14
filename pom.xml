@@ -29,7 +29,7 @@
         <!--Dependencies:-->
         <google.gson.version>2.8.0</google.gson.version>
         <google.guava.version>22.0</google.guava.version>
-        <square.dagger.version>1.2.5</square.dagger.version>
+        <google.dagger.version>2.11</google.dagger.version>
 
         <!--Logging:-->
         <slf4j.version>1.7.25</slf4j.version>
@@ -37,6 +37,8 @@
 
         <!--Maven Plugins:-->
         <maven.assembly.plugin.version>3.0.0</maven.assembly.plugin.version>
+        <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
+        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -61,20 +63,14 @@
                 <version>${google.guava.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.squareup.dagger</groupId>
-                <artifactId>dagger</artifactId>
-                <version>${square.dagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.dagger</groupId>
-                <artifactId>dagger-compiler</artifactId>
-                <version>${square.dagger.version}</version>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.dagger</groupId>
+                <artifactId>dagger</artifactId>
+                <version>${google.dagger.version}</version>
             </dependency>
 
             <!--General/Internal:-->
@@ -98,11 +94,26 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven.assembly.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>com.google.dagger</groupId>
+                                <artifactId>dagger-compiler</artifactId>
+                                <version>${google.dagger.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

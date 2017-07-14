@@ -1,16 +1,14 @@
 package scooterdelta.challenge.bot;
 
-import dagger.ObjectGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scooterdelta.challenge.bot.module.ChallengeModule;
+import scooterdelta.challenge.bot.module.ChallengeComponent;
+import scooterdelta.challenge.bot.module.DaggerChallengeComponent;
 import scooterdelta.challenge.bot.process.ProcessEngine;
 import scooterdelta.challenge.bot.process.module.ProcessModule;
 
 import javax.inject.Inject;
 import java.io.File;
-
-import static dagger.ObjectGraph.create;
 
 public class ChallengeApplication implements Runnable {
 
@@ -53,13 +51,12 @@ public class ChallengeApplication implements Runnable {
             System.exit(1);
         }
 
-        final ObjectGraph objectGraph = create(
-                new ChallengeModule(),
-                new ProcessModule(workingDir, key)
-        );
-        final ChallengeApplication challengeApplication = objectGraph.get(ChallengeApplication.class);
+        final ChallengeComponent challengeComponent = DaggerChallengeComponent.builder()
+                .processModule(new ProcessModule(workingDir, key))
+                .build();
 
-        challengeApplication.run();
+        // Run the application
+        challengeComponent.getChallengeApplication().run();
     }
 
     private static void printUsage() {
