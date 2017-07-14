@@ -8,8 +8,8 @@ import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import java.io.IOException
 import javax.inject.Inject
 
-class ProcessEngine @Inject constructor(val fileState: FileState,
-                                        val deserializer: GameStateDeserializer) : Runnable {
+class ProcessEngine @Inject constructor(private val fileState: FileState,
+                                        private val deserializer: GameStateDeserializer) : Runnable {
 
     val LOGGER: Logger = LoggerFactory.getLogger(ProcessEngine::class.java)
 
