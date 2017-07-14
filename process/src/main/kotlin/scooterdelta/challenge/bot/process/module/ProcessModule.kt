@@ -3,7 +3,7 @@ package scooterdelta.challenge.bot.process.module
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import scooterdelta.challenge.bot.common.local.FileState
+import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import java.io.File
 

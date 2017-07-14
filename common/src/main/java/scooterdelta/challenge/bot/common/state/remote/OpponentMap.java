@@ -1,7 +1,7 @@
-package scooterdelta.challenge.bot.common.state;
+package scooterdelta.challenge.bot.common.state.remote;
 
 import com.google.gson.annotations.SerializedName;
-import scooterdelta.challenge.bot.common.state.domain.OpponentCell;
+import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell;
 
 import java.util.ArrayList;
 import java.util.Objects;

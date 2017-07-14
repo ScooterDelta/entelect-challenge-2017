@@ -1,4 +1,4 @@
-package scooterdelta.challenge.bot.common.state;
+package scooterdelta.challenge.bot.common.state.remote;
 
 import com.google.gson.annotations.SerializedName;
 import scooterdelta.challenge.bot.common.lookup.ShipType;

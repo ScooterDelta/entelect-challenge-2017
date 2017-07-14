@@ -1,15 +1,20 @@
-package scooterdelta.challenge.bot.common.state.domain;
+package scooterdelta.challenge.bot.common.state.remote.domain;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
-public abstract class AbstractCell {
+public class Point {
 
-    @SerializedName("X")
-    private int x;
     @SerializedName("Y")
     private int y;
+    @SerializedName("X")
+    private int x;
+
+    public Point(final int x, final int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public int getX() {
         return x;
@@ -27,15 +32,11 @@ public abstract class AbstractCell {
         this.y = y;
     }
 
-    public Point getPoint() {
-        return new Point(x, y);
-    }
-
     @Override
     public String toString() {
-        return "AbstractCell{" +
-                "x=" + x +
-                ", y=" + y +
+        return "Point{" +
+                "y=" + y +
+                ", x=" + x +
                 '}';
     }
 
@@ -43,13 +44,13 @@ public abstract class AbstractCell {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final AbstractCell that = (AbstractCell) o;
-        return x == that.x &&
-                y == that.y;
+        final Point point = (Point) o;
+        return y == point.y &&
+                x == point.x;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(y, x);
     }
 }

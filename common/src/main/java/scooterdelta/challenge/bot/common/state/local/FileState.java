@@ -1,4 +1,4 @@
-package scooterdelta.challenge.bot.common.local;
+package scooterdelta.challenge.bot.common.state.local;
 
 import java.io.File;
 import java.util.Objects;
@@ -8,7 +8,7 @@ public class FileState {
     private final File workingDirectory;
     private final String playerKey;
 
-    public FileState(File workingDirectory, String playerKey) {
+    public FileState(final File workingDirectory, final String playerKey) {
         this.workingDirectory = workingDirectory;
         this.playerKey = playerKey;
     }
@@ -30,10 +30,10 @@ public class FileState {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FileState fileState = (FileState) o;
+        final FileState fileState = (FileState) o;
         return Objects.equals(workingDirectory, fileState.workingDirectory) &&
                 Objects.equals(playerKey, fileState.playerKey);
     }

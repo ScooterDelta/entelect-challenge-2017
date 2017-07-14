@@ -3,7 +3,7 @@ package scooterdelta.challenge.bot.process;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
-import scooterdelta.challenge.bot.common.local.FileState;
+import scooterdelta.challenge.bot.common.state.local.FileState;
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer;
 
 import java.io.File;

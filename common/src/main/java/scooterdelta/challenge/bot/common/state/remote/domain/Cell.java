@@ -1,4 +1,4 @@
-package scooterdelta.challenge.bot.common.state.domain;
+package scooterdelta.challenge.bot.common.state.remote.domain;
 
 import com.google.gson.annotations.SerializedName;
 
