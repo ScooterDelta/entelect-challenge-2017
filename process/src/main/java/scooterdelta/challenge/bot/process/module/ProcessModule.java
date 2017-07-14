@@ -3,7 +3,9 @@ package scooterdelta.challenge.bot.process.module;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
+import scooterdelta.challenge.bot.common.local.FileState;
 import scooterdelta.challenge.bot.process.ProcessEngine;
+import scooterdelta.challenge.bot.process.converter.GameStateDeserializer;
 
 import java.io.File;
 
@@ -21,18 +23,18 @@ public class ProcessModule {
     }
 
     @Provides
-    File provideWorkingDirectory() {
-        return workingDirectory;
-    }
-
-    @Provides
-    String providePlayerKey() {
-        return playerKey;
+    FileState provideFileState() {
+        return new FileState(workingDirectory, playerKey);
     }
 
     @Provides
     Gson provideGson() {
         return new Gson();
+    }
+
+    @Provides
+    GameStateDeserializer provideDeserializer(final Gson gson) {
+        return new GameStateDeserializer(gson);
     }
 
 }

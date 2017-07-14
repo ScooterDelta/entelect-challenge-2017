@@ -3,6 +3,8 @@ package scooterdelta.challenge.bot.process;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
+import scooterdelta.challenge.bot.common.local.FileState;
+import scooterdelta.challenge.bot.process.converter.GameStateDeserializer;
 
 import java.io.File;
 
@@ -17,7 +19,7 @@ public class ProcessEngineTest {
     @Before
     public void setUp() throws Exception {
         final File workingDir = new File(getResource("data/").toURI());
-        processEngine = new ProcessEngine(workingDir, PLAYER_KEY, new Gson());
+        processEngine = new ProcessEngine(new FileState(workingDir, PLAYER_KEY), new GameStateDeserializer(new Gson()));
     }
 
     @Test
