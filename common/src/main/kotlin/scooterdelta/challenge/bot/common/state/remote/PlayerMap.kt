@@ -1,6 +1,8 @@
 package scooterdelta.challenge.bot.common.state.remote
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import scooterdelta.challenge.bot.common.state.local.Map
 import scooterdelta.challenge.bot.common.state.remote.domain.Cell
 
 data class PlayerMap(
@@ -16,4 +18,7 @@ data class PlayerMap(
 
         @JsonProperty("MapHeight")
         val mapHeight: Int
-)
+) {
+    @JsonIgnore
+    val map: Map<Cell> = Map(cells)
+}

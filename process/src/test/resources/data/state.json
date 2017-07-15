@@ -2,14 +2,14 @@
   "PlayerMap": {
     "Cells": [
       {
-        "Occupied": false,
+        "Occupied": true,
         "Hit": false,
         "X": 0,
         "Y": 0
       },
       {
         "Occupied": false,
-        "Hit": false,
+        "Hit": true,
         "X": 0,
         "Y": 1
       },
@@ -158,7 +158,7 @@
         "Y": 5
       },
       {
-        "Occupied": false,
+        "Occupied": true,
         "Hit": false,
         "X": 2,
         "Y": 6
@@ -171,7 +171,7 @@
       },
       {
         "Occupied": false,
-        "Hit": false,
+        "Hit": true,
         "X": 2,
         "Y": 8
       },
@@ -863,7 +863,7 @@
         "Y": 8
       },
       {
-        "Damaged": false,
+        "Damaged": true,
         "Missed": false,
         "X": 1,
         "Y": 9
@@ -876,7 +876,7 @@
       },
       {
         "Damaged": false,
-        "Missed": false,
+        "Missed": true,
         "X": 2,
         "Y": 1
       },
@@ -1074,12 +1074,12 @@
       },
       {
         "Damaged": false,
-        "Missed": false,
+        "Missed": true,
         "X": 5,
         "Y": 4
       },
       {
-        "Damaged": false,
+        "Damaged": true,
         "Missed": false,
         "X": 5,
         "Y": 5

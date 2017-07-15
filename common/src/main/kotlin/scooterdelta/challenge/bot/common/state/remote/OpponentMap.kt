@@ -1,9 +1,11 @@
 package scooterdelta.challenge.bot.common.state.remote
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import scooterdelta.challenge.bot.common.state.local.Map
 import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
 
-data class OpponentMap (
+data class OpponentMap(
 
         @JsonProperty("Alive")
         val alive: Boolean,
@@ -19,4 +21,7 @@ data class OpponentMap (
 
         @JsonProperty("Cells")
         val cells: ArrayList<OpponentCell>
-)
+) {
+    @JsonIgnore
+    val map: Map<OpponentCell> = Map(cells)
+}

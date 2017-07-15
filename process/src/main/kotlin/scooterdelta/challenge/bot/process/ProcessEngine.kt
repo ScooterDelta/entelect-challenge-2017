@@ -19,6 +19,8 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
         try {
             val gameState: GameState = deserializer.deserialize(fileState.workingDirectory)
             LOGGER.info("Deserialized game state: {}", gameState)
+            LOGGER.info("Player Map:\n${gameState.playerMap.map.printMap()}")
+            LOGGER.info("Opponent Map:\n${gameState.opponentMap.map.printMap()}")
         } catch (ex: IOException) {
             LOGGER.error("Error extracting state object: {}", ex)
         }
