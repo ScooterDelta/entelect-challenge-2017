@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state.remote.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class OpponentCell(
@@ -17,6 +18,10 @@ class OpponentCell(
         val missed: Boolean
 
 ) : BaseCell(x, y) {
+
+    @JsonIgnore
+    var hitChance: Double = 0.0
+
     override fun printContent(): String {
         when {
             missed -> {return "+"}
@@ -34,6 +39,7 @@ class OpponentCell(
 
         if (damaged != other.damaged) return false
         if (missed != other.missed) return false
+        if (hitChance != other.hitChance) return false
 
         return true
     }
@@ -42,11 +48,12 @@ class OpponentCell(
         var result = super.hashCode()
         result = 31 * result + damaged.hashCode()
         result = 31 * result + missed.hashCode()
+        result = 31 * result + hitChance.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "OpponentCell(damaged=$damaged, missed=$missed) ${super.toString()}"
+        return "OpponentCell(damaged=$damaged, missed=$missed, hitChance=$hitChance) ${super.toString()}"
     }
 
 }
