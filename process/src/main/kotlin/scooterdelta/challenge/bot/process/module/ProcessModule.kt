@@ -7,8 +7,9 @@ import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import scooterdelta.challenge.bot.process.processes.Process
 import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapProcess
-import scooterdelta.challenge.bot.process.processes.placement.BasicPlacementImpl
+import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
 import java.io.File
+import java.util.*
 import javax.inject.Named
 
 @Module
@@ -33,12 +34,18 @@ class ProcessModule(private val workingDirectory: File,
     @Provides
     @Named("placementProcesses")
     fun providePlacementProcesses(): ArrayList<Process> {
-        return arrayListOf(BasicPlacementImpl())
+        // Ordered list of placement processes
+        return arrayListOf(
+                RandomPlacementImpl(Random())
+        )
     }
 
     @Provides
     @Named("attackProcesses")
     fun provideAttackProcesses(): ArrayList<Process> {
-        return arrayListOf(BuildProbabilityMapProcess())
+        // Ordered list of attack processes
+        return arrayListOf(
+                BuildProbabilityMapProcess()
+        )
     }
 }

@@ -20,7 +20,7 @@ class Map<out T : BaseCell>(cells: List<T>) {
         val cols: MutableList<List<T>> = mutableListOf()
         col.mapTo(cols) { it.toList() }
 
-        this.cells = cols.toList()
+        this.cells = cols.reversed().toList()
         this.totalCells = cells.size
     }
 

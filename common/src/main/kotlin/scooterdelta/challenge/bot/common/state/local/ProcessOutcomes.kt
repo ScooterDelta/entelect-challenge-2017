@@ -1,4 +1,9 @@
 package scooterdelta.challenge.bot.common.state.local
 
-class ProcessOutcomes {
-}
+import scooterdelta.challenge.bot.common.command.Command
+import scooterdelta.challenge.bot.common.lookup.StateLookup
+
+data class ProcessOutcomes(
+        var command: Command,
+        var stateLookup: StateLookup
+)

@@ -2,11 +2,18 @@ package scooterdelta.challenge.bot.common.state.remote.domain
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class Point(
-
-        @JsonProperty("Y")
-        val y: Int,
+class Point(
 
         @JsonProperty("X")
-        val x: Int
-)
+        x: Int,
+
+        @JsonProperty("Y")
+        y: Int
+
+) : BaseCell(x, y) {
+
+    override fun printContent(): String {
+        return "x"
+    }
+
+}

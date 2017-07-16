@@ -7,8 +7,9 @@ import org.junit.Test
 import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapProcess
-import scooterdelta.challenge.bot.process.processes.placement.BasicPlacementImpl
+import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
 import java.io.File
+import java.util.*
 
 class ProcessEngineTest {
 
@@ -21,7 +22,7 @@ class ProcessEngineTest {
         processEngine = ProcessEngine(
                 FileState(workingDir, PLAYER_KEY),
                 GameStateDeserializer(ObjectMapper()),
-                arrayListOf(BasicPlacementImpl()),
+                arrayListOf(RandomPlacementImpl(Random())),
                 arrayListOf(BuildProbabilityMapProcess()))
     }
 
