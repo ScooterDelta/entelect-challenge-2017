@@ -24,9 +24,15 @@ class OpponentCell(
 
     override fun printContent(): String {
         when {
-            missed -> {return "+"}
-            damaged -> {return "X"}
-            else -> {return "0"}
+            missed -> {
+                return "+"
+            }
+            damaged -> {
+                return "X"
+            }
+            else -> {
+                return "0"
+            }
         }
     }
 

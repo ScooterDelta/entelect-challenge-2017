@@ -3,7 +3,7 @@ package scooterdelta.challenge.bot.common.command
 import scooterdelta.challenge.bot.common.lookup.Code
 import scooterdelta.challenge.bot.common.state.remote.domain.Point
 
-class AttackCommand(
+data class AttackCommand(
         val point: Point,
         val code: Code
 ) : Command {

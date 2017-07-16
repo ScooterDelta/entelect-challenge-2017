@@ -7,6 +7,7 @@ import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import scooterdelta.challenge.bot.process.processes.Process
 import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapProcess
+import scooterdelta.challenge.bot.process.processes.attack.SelectAttackCommandProcess
 import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
 import java.io.File
 import java.util.*
@@ -45,7 +46,8 @@ class ProcessModule(private val workingDirectory: File,
     fun provideAttackProcesses(): ArrayList<Process> {
         // Ordered list of attack processes
         return arrayListOf(
-                BuildProbabilityMapProcess()
+                BuildProbabilityMapProcess(),
+                SelectAttackCommandProcess()
         )
     }
 }
