@@ -82,6 +82,11 @@
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-reflect</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
 
             <!--General/Internal:-->
             <dependency>
@@ -124,7 +129,6 @@
                             <configuration>
                                 <sourceDirs>
                                     <sourceDir>src/main/kotlin</sourceDir>
-                                    <sourceDir>src/main/java</sourceDir>
                                 </sourceDirs>
                                 <annotationProcessorPaths>
                                     <annotationProcessorPath>
@@ -143,7 +147,6 @@
                             <configuration>
                                 <sourceDirs>
                                     <sourceDir>src/main/kotlin</sourceDir>
-                                    <sourceDir>src/main/java</sourceDir>
                                 </sourceDirs>
                             </configuration>
                         </execution>
@@ -155,7 +158,6 @@
                             <configuration>
                                 <sourceDirs>
                                     <sourceDir>src/test/kotlin</sourceDir>
-                                    <sourceDir>src/test/java</sourceDir>
                                 </sourceDirs>
                                 <annotationProcessorPaths>
                                     <annotationProcessorPath>
@@ -174,7 +176,6 @@
                             <configuration>
                                 <sourceDirs>
                                     <sourceDir>src/test/kotlin</sourceDir>
-                                    <sourceDir>src/test/java</sourceDir>
                                     <sourceDir>target/generated-sources/kapt/test</sourceDir>
                                 </sourceDirs>
                             </configuration>

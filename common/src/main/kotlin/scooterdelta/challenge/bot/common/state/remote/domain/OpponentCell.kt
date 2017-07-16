@@ -20,7 +20,7 @@ class OpponentCell(
 ) : BaseCell(x, y) {
 
     @JsonIgnore
-    var hitChance: Double = 0.0
+    var singleShotHitChance: Long = 0L
 
     override fun printContent(): String {
         when {
@@ -39,7 +39,7 @@ class OpponentCell(
 
         if (damaged != other.damaged) return false
         if (missed != other.missed) return false
-        if (hitChance != other.hitChance) return false
+        if (singleShotHitChance != other.singleShotHitChance) return false
 
         return true
     }
@@ -48,12 +48,12 @@ class OpponentCell(
         var result = super.hashCode()
         result = 31 * result + damaged.hashCode()
         result = 31 * result + missed.hashCode()
-        result = 31 * result + hitChance.hashCode()
+        result = 31 * result + singleShotHitChance.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "OpponentCell(damaged=$damaged, missed=$missed, hitChance=$hitChance) ${super.toString()}"
+        return "OpponentCell(damaged=$damaged, missed=$missed, singleShotHitChance=$singleShotHitChance) ${super.toString()}"
     }
 
 }

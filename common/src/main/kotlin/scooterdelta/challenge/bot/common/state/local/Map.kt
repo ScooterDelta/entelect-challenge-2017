@@ -5,6 +5,7 @@ import scooterdelta.challenge.bot.common.state.remote.domain.BaseCell
 class Map<out T : BaseCell>(cells: List<T>) {
 
     val cells: List<List<T>>
+    val totalCells: Int
 
     init {
         val col: MutableList<MutableList<T>> = mutableListOf()
@@ -20,6 +21,7 @@ class Map<out T : BaseCell>(cells: List<T>) {
         col.mapTo(cols) { it.toList() }
 
         this.cells = cols.toList()
+        this.totalCells = cells.size
     }
 
     override fun equals(other: Any?): Boolean {
