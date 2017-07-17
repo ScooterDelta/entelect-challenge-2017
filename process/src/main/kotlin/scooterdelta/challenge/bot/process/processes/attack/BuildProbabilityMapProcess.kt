@@ -3,8 +3,6 @@ package scooterdelta.challenge.bot.process.processes.attack
 import scooterdelta.challenge.bot.common.state.local.Map
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
-import scooterdelta.challenge.bot.common.state.remote.domain.BaseCell
-import scooterdelta.challenge.bot.common.state.remote.domain.Cell
 import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
 import scooterdelta.challenge.bot.process.processes.Process
 
@@ -32,7 +30,7 @@ class BuildProbabilityMapProcess : Process {
         if (!cell.missed && !cell.damaged) {
             chance++
         }
-        return chance * probabilityMultiple / totalHitAndMissed
+        return chance * probabilityMultiple / (map.totalCells - totalHitAndMissed)
     }
 
     private fun calculateTotalDamagedAndMissed(cells: List<OpponentCell>): Long {
