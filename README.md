@@ -1,6 +1,6 @@
-# Entelect Challenge BOT - Written in Java.
+# Entelect Challenge BOT - Written in Kotlin.
 
-- Using Dagger dependency injection framework.
+- Using Dagger 2 dependency injection framework.
 - Written by Anthony Farquharson.
 
 ## Set up:
