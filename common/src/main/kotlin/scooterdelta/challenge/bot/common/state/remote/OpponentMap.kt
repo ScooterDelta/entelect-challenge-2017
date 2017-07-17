@@ -17,10 +17,10 @@ data class OpponentMap(
         val name: String,
 
         @JsonProperty("Ships")
-        val ships: ArrayList<OpponentShip>,
+        val ships: List<OpponentShip>,
 
         @JsonProperty("Cells")
-        val cells: ArrayList<OpponentCell>
+        val cells: List<OpponentCell>
 ) {
     @JsonIgnore
     val map: Map<OpponentCell> = Map(cells)

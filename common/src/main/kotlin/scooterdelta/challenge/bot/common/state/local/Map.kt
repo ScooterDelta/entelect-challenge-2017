@@ -35,6 +35,23 @@ class Map<out T : BaseCell>(cells: List<T>) {
         return true
     }
 
+    fun findNAdjacentCells(cell: BaseCell, n: Int): List<T> {
+        val cells: MutableList<T> = mutableListOf()
+        for (x in cell.x - n..cell.x + n) {
+            (cell.y - n..cell.y + n)
+                    .filter { x != cell.x && it != cell.y }
+                    .mapNotNullTo(cells) { getCellFromMap(x, it) }
+        }
+        return cells.toList()
+    }
+
+    fun getCellFromMap(x: Int, y: Int): T? {
+        if (x in 0..cells[0].size - 1 && y in 0..cells.size - 1) {
+            return cells[y][x]
+        }
+        return null
+    }
+
     override fun hashCode(): Int {
         return cells.hashCode()
     }

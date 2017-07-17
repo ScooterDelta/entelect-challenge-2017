@@ -11,7 +11,7 @@ data class PlayerMap(
         val owner: BattleshipPlayer,
 
         @JsonProperty("Cells")
-        val cells: ArrayList<Cell>,
+        val cells: List<Cell>,
 
         @JsonProperty("MapWidth")
         val mapWidth: Int,

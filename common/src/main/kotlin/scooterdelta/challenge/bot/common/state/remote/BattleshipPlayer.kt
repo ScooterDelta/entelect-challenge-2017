@@ -12,7 +12,7 @@ data class BattleshipPlayer(
         val name: String,
 
         @JsonProperty("Ships")
-        val ships: ArrayList<Ship>,
+        val ships: List<Ship>,
 
         @JsonProperty("Points")
         val points: Int,

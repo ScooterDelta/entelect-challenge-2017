@@ -47,7 +47,7 @@ class ProcessModule(private val workingDirectory: File,
         // Ordered list of attack processes
         return arrayListOf(
                 BuildProbabilityMapProcess(),
-                SelectAttackCommandProcess()
+                SelectAttackCommandProcess(Random())
         )
     }
 }
