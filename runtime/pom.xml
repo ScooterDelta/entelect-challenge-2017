@@ -26,8 +26,8 @@
 
         <!--General/Internal:-->
         <dependency>
-            <groupId>scooterdelta.challenge.bot.logging</groupId>
-            <artifactId>logging-impl</artifactId>
+            <groupId>scooterdelta.challenge.bot</groupId>
+            <artifactId>logging</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

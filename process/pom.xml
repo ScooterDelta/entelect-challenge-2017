@@ -19,8 +19,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>scooterdelta.challenge.bot.logging</groupId>
-            <artifactId>logging-test</artifactId>
+            <groupId>scooterdelta.challenge.bot</groupId>
+            <artifactId>logging</artifactId>
             <scope>test</scope>
         </dependency>
 
