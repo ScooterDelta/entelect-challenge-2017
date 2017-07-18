@@ -15,8 +15,8 @@ data class Ship(
         val shipType: ShipType,
 
         @JsonProperty("Weapons")
-        val weapons: ArrayList<Weapon>,
+        val weapons: List<Weapon>,
 
         @JsonProperty("Cells")
-        val cells: ArrayList<Cell>
+        val cells: List<Cell>
 )

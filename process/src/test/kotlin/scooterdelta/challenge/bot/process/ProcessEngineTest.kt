@@ -1,6 +1,8 @@
 package scooterdelta.challenge.bot.process
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.common.collect.SortedSetMultimap
+import com.google.common.collect.TreeMultimap
 import com.google.common.io.Resources
 import org.junit.Before
 import org.junit.Test

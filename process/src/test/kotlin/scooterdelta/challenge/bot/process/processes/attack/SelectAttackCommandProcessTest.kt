@@ -7,6 +7,8 @@ import org.junit.Test
 import scooterdelta.challenge.bot.common.command.AttackCommand
 import scooterdelta.challenge.bot.common.command.Command
 import scooterdelta.challenge.bot.common.lookup.Code
+import scooterdelta.challenge.bot.common.lookup.ShipType
+import scooterdelta.challenge.bot.common.lookup.WeaponType
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.BattleshipPlayer
 import scooterdelta.challenge.bot.common.state.remote.GameState
@@ -14,14 +16,15 @@ import scooterdelta.challenge.bot.common.state.remote.OpponentMap
 import scooterdelta.challenge.bot.common.state.remote.PlayerMap
 import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
 import scooterdelta.challenge.bot.common.state.remote.domain.Point
-import java.util.*
+import scooterdelta.challenge.bot.common.state.remote.domain.Ship
+import scooterdelta.challenge.bot.common.state.remote.domain.Weapon
 
 class SelectAttackCommandProcessTest {
 
     lateinit var selectAttackCommandProcess: SelectAttackCommandProcess
 
     @Before fun setUp() {
-        selectAttackCommandProcess = SelectAttackCommandProcess(Random())
+        selectAttackCommandProcess = SelectAttackCommandProcess()
     }
 
     @Test fun testProbabilityOrdering() {
@@ -49,7 +52,10 @@ class SelectAttackCommandProcessTest {
     private fun createGameState(cells: List<OpponentCell>): GameState {
         val gameState: GameState = GameState(
                 PlayerMap(
-                        BattleshipPlayer(0, "", listOf(), 0, 0, false, false, 0, 0, 1, 'A'),
+                        BattleshipPlayer(0, "",
+                                listOf(Ship(false, true, ShipType.BATTLESHIP,
+                                        arrayListOf(Weapon(WeaponType.SINGLE_SHOT, 1)), arrayListOf())),
+                                0, 2, false, false, 0, 0, 1, 'A'),
                         listOf(), 0, 0),
                 OpponentMap(true, 0, "", listOf(), cells),
                 "0",

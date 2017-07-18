@@ -58,7 +58,7 @@ class ProcessModule(private val workingDirectory: File,
                 BuildHuntDestroyProbabilityMapProcess(),
 
                 // Select most likely weapon/location choice
-                SelectAttackCommandProcess(Random())
+                SelectAttackCommandProcess()
         )
     }
 
