@@ -42,7 +42,7 @@ class SelectAttackCommandProcessTest {
 
     private fun buildOpponentCellWithProbability(x: Int, y: Int, damaged: Boolean, missed: Boolean, chance: Long): OpponentCell {
         val opponentCell: OpponentCell = OpponentCell(x, y, damaged, missed)
-        opponentCell.singleShotHitChance = chance
+        opponentCell.attackTypeProbability[Code.FIRE_SHOT] = chance
         return opponentCell
     }
 

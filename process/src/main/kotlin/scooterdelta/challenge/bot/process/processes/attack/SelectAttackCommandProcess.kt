@@ -37,9 +37,9 @@ class SelectAttackCommandProcess(private val randomGenerator: Random) : Process 
     private fun determineSortedMap(cells: List<OpponentCell>): SortedSetMultimap<Long, OpponentCell> {
         val sortedMap: SortedSetMultimap<Long, OpponentCell> = TreeMultimap.create(
                 { o1, o2 -> o2.compareTo(o1) },
-                { o1, o2 -> o2.singleShotHitChance.compareTo(o1.singleShotHitChance) })
+                { o1, o2 -> o2.compareTo(o1) })
 
-        cells.forEach { sortedMap.put(it.singleShotHitChance, it) }
+        cells.forEach { sortedMap.put(it.attackTypeProbability[Code.FIRE_SHOT], it) }
         return sortedMap
     }
 
