@@ -18,13 +18,14 @@ import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
 import scooterdelta.challenge.bot.common.state.remote.domain.Point
 import scooterdelta.challenge.bot.common.state.remote.domain.Ship
 import scooterdelta.challenge.bot.common.state.remote.domain.Weapon
+import java.util.*
 
 class SelectAttackCommandProcessTest {
 
     lateinit var selectAttackCommandProcess: SelectAttackCommandProcess
 
     @Before fun setUp() {
-        selectAttackCommandProcess = SelectAttackCommandProcess()
+        selectAttackCommandProcess = SelectAttackCommandProcess(Random())
     }
 
     @Test fun testProbabilityOrdering() {

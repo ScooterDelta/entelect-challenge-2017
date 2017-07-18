@@ -1,7 +1,7 @@
 package scooterdelta.challenge.bot.process.processes.attack
 
-import com.google.common.collect.SortedSetMultimap
-import com.google.common.collect.TreeMultimap
+import com.google.common.collect.HashMultimap
+import com.google.common.collect.SetMultimap
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import scooterdelta.challenge.bot.common.command.AttackCommand
@@ -17,13 +17,13 @@ import scooterdelta.challenge.bot.common.state.remote.domain.Weapon
 import scooterdelta.challenge.bot.process.processes.Process
 import java.util.*
 
-class SelectAttackCommandProcess : Process {
+class SelectAttackCommandProcess(private val random: Random) : Process {
 
     val LOGGER: Logger = LoggerFactory.getLogger(SelectAttackCommandProcess::class.java)
 
     override fun process(gameState: GameState, processOutcomes: ProcessOutcomes) {
         val opponentCells: List<OpponentCell> = ArrayList(gameState.opponentMap.cells)
-        val sortedMap: SortedSetMultimap<Long, OpponentCellAttackCodeGroup> = determineSortedMap(opponentCells, gameState.playerMap.owner)
+        val sortedMap: SetMultimap<Long, OpponentCellAttackCodeGroup> = determineSortedMap(opponentCells, gameState.playerMap.owner)
 
         val cellGroup: OpponentCellAttackCodeGroup = getMaxProbabilityCheapestEnergy(sortedMap)
 
@@ -33,19 +33,21 @@ class SelectAttackCommandProcess : Process {
         LOGGER.info("Sending attack command: ${processOutcomes.command}")
     }
 
-    private fun getMaxProbabilityCheapestEnergy(sortedMap: SortedSetMultimap<Long, OpponentCellAttackCodeGroup>): OpponentCellAttackCodeGroup {
-        val sortedSet: SortedSet<OpponentCellAttackCodeGroup> = sortedMap[sortedMap.keySet().first()]
+    private fun getMaxProbabilityCheapestEnergy(sortedMap: SetMultimap<Long, OpponentCellAttackCodeGroup>): OpponentCellAttackCodeGroup {
+        val sortedSet: MutableSet<OpponentCellAttackCodeGroup> = sortedMap[sortedMap.keySet().last()]
 
-        return sortedSet.first()
+        val energyMap: SetMultimap<Int, OpponentCellAttackCodeGroup> = HashMultimap.create()
+        sortedSet.forEach { energyMap.put(it.weapon.energyRequired, it) }
+
+        val energySet: MutableSet<OpponentCellAttackCodeGroup> = energyMap[energyMap.keySet().first()]
+        return energySet.elementAt(random.nextInt(energySet.size))
     }
 
     /**
      * Places all attacks with energy enough to place in probability map
      */
-    private fun determineSortedMap(cells: List<OpponentCell>, player: BattleshipPlayer): SortedSetMultimap<Long, OpponentCellAttackCodeGroup> {
-        val sortedMap: SortedSetMultimap<Long, OpponentCellAttackCodeGroup> = TreeMultimap.create(
-                { o1, o2 -> o2.compareTo(o1) },
-                { o1, o2 -> o1.compareTo(o2) })
+    private fun determineSortedMap(cells: List<OpponentCell>, player: BattleshipPlayer): SetMultimap<Long, OpponentCellAttackCodeGroup> {
+        val sortedMap: SetMultimap<Long, OpponentCellAttackCodeGroup> = HashMultimap.create()
 
         cells.forEach {
             cell ->

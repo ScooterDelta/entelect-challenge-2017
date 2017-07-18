@@ -22,7 +22,7 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
 
             } else {
 
-                val verticalHorizontalCells: List<OpponentCell> = subCells
+                val verticalHorizontalCells: List<OpponentCell> = damaged
                         .filter { it.x == cell.x || it.y == cell.y }
                         .map { it }
 

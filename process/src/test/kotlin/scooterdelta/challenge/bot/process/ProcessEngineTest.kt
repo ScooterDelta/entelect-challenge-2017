@@ -58,7 +58,7 @@ class ProcessEngineTest {
                         BuildHuntDestroyProbabilityMapProcess(),
 
                         // Select most likely weapon/location choice
-                        SelectAttackCommandProcess()
+                        SelectAttackCommandProcess(Random())
                 )
         )
     }
