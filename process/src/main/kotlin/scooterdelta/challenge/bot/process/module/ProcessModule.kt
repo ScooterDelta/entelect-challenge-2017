@@ -11,7 +11,7 @@ import scooterdelta.challenge.bot.process.processes.attack.BuildHuntDestroyProba
 import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapProcess
 import scooterdelta.challenge.bot.process.processes.attack.SelectAttackCommandProcess
 import scooterdelta.challenge.bot.process.processes.attack.SpecialWeaponProbabilityMapProcess
-import scooterdelta.challenge.bot.process.processes.attack.special.DoubleShotVerticleCalculator
+import scooterdelta.challenge.bot.process.processes.attack.special.*
 import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
 import java.io.File
 import java.util.*
@@ -52,8 +52,12 @@ class ProcessModule(private val workingDirectory: File,
         // Ordered list of attack processes
         return arrayListOf(
                 BuildProbabilityMapProcess(),
-                BuildHuntDestroyProbabilityMapProcess(),
                 SpecialWeaponProbabilityMapProcess(provideProbabilityCalculators()),
+
+                // RUN HUNT DESTROY LAST - Overrides previous probabilities while destroying ship
+                BuildHuntDestroyProbabilityMapProcess(),
+
+                // Select most likely weapon/location choice
                 SelectAttackCommandProcess(Random())
         )
     }
@@ -62,7 +66,12 @@ class ProcessModule(private val workingDirectory: File,
     @Named("probabilityCalculators")
     fun provideProbabilityCalculators(): ArrayList<ProbabilityCalculator> {
         return arrayListOf(
-                DoubleShotVerticleCalculator()
+                DoubleShotVerticalCalculator(),
+                DoubleShotHorizontalCalculator(),
+                CornerShotCalculator(),
+                CrossDiagonalShotCalculator(),
+                CrossHorizontalShotCalculator(),
+                SeekerMissileCalculator()
         )
     }
 }

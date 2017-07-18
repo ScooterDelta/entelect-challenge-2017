@@ -23,6 +23,10 @@ class OpponentCell(
     @JsonIgnore
     val attackTypeProbability: MutableMap<Code, Long> = mutableMapOf()
 
+    fun getAttackTypeProbability(code: Code): Long {
+        return attackTypeProbability.getOrDefault(code, 0L)
+    }
+
     override fun printContent(): String {
         when {
             missed -> {
@@ -64,14 +68,8 @@ class OpponentCell(
     }
 
     override fun compareTo(other: OpponentCell): Int {
-        var value = 0L
-        var otherValue = 0L
-        if (other.attackTypeProbability[Code.FIRE_SHOT] != null) {
-            otherValue = other.attackTypeProbability[Code.FIRE_SHOT] as Long
-        }
-        if (attackTypeProbability[Code.FIRE_SHOT] != null) {
-            value = attackTypeProbability[Code.FIRE_SHOT] as Long
-        }
+        val value = getAttackTypeProbability(Code.FIRE_SHOT)
+        val otherValue = other.getAttackTypeProbability(Code.FIRE_SHOT)
         return value.compareTo(otherValue)
     }
 

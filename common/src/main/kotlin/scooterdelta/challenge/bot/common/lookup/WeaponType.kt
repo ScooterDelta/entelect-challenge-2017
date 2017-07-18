@@ -20,6 +20,9 @@ enum class WeaponType {
     CORNER_SHOT,
 
     @JsonProperty("CrossShot")
-    CROSS_SHOT
+    CROSS_SHOT,
+
+    @JsonProperty("None")
+    NONE
 
 }
