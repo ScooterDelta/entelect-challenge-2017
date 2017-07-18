@@ -36,7 +36,7 @@ class SelectAttackCommandProcessTest {
 
         selectAttackCommandProcess.process(gameState, processOutcomes)
 
-        val expectedValue: Command = AttackCommand(Point(1, 1), Code.FIRESHOT)
+        val expectedValue: Command = AttackCommand(Point(1, 1), Code.FIRE_SHOT)
         assertThat("The correct cell is selected", processOutcomes.command, equalTo(expectedValue))
     }
 

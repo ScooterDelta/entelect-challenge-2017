@@ -22,7 +22,7 @@ class SelectAttackCommandProcess(private val randomGenerator: Random) : Process 
         val sortedMap: SortedSetMultimap<Long, OpponentCell> = determineSortedMap(opponentCells)
         val opponentCell: OpponentCell = getMaxRandom(sortedMap)
 
-        processOutcomes.command = AttackCommand(opponentCell.getPoint(), Code.FIRESHOT)
+        processOutcomes.command = AttackCommand(opponentCell.getPoint(), Code.FIRE_SHOT)
         processOutcomes.stateLookup = StateLookup.COMMAND
 
         LOGGER.info("Sending attack command: ${processOutcomes.command}")
