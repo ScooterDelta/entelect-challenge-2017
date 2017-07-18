@@ -1,6 +1,7 @@
 package scooterdelta.challenge.bot.common.state.local
 
 import scooterdelta.challenge.bot.common.state.remote.domain.BaseCell
+import scooterdelta.challenge.bot.common.state.remote.domain.Point
 
 class Map<out T : BaseCell>(cells: List<T>) {
 
@@ -12,23 +13,30 @@ class Map<out T : BaseCell>(cells: List<T>) {
     private val max: BaseCell
 
     init {
-        val col: MutableList<MutableList<T>> = mutableListOf()
+        if (cells.isNotEmpty()) {
+            val col: MutableList<MutableList<T>> = mutableListOf()
 
-        min = cells[0]
-        max = cells[cells.size - 1]
+            min = cells[0]
+            max = cells[cells.size - 1]
 
-        for (cell in cells) {
-            if (cell.x == min.x) {
-                col.add(mutableListOf())
+            for (cell in cells) {
+                if (cell.x == min.x) {
+                    col.add(mutableListOf())
+                }
+                col[cell.y - min.y].add(cell)
             }
-            col[cell.y - min.y].add(cell)
+
+            val cols: MutableList<List<T>> = mutableListOf()
+            col.mapTo(cols) { it.toList() }
+
+            this.cells = cols.reversed().toList()
+            this.totalCells = cells.size
+        } else {
+            this.cells = listOf()
+            this.totalCells = 0
+            this.min = Point(0, 0)
+            this.max = Point(0, 0)
         }
-
-        val cols: MutableList<List<T>> = mutableListOf()
-        col.mapTo(cols) { it.toList() }
-
-        this.cells = cols.reversed().toList()
-        this.totalCells = cells.size
     }
 
     fun findNAdjacentCells(cell: BaseCell, n: Int): List<T> {
