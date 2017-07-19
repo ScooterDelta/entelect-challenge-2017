@@ -17,6 +17,10 @@ class SeekerMissileCalculator : AbstractProbabilityCalculator() {
                     .filter { !it.missed }
                     .mapTo(filteredList) { it }
         }
+        // Will re-hit a damaged cell in range if found
+        if (isDamagedBlockInRange(filteredList)) {
+            filteredList.clear()
+        }
         return filteredList.toList()
     }
 
@@ -24,7 +28,11 @@ class SeekerMissileCalculator : AbstractProbabilityCalculator() {
         val xDist: Double = (cell.x - otherCell.x).toDouble()
         val yDist: Double = (cell.y - otherCell.y).toDouble()
 
-        return sqrt((xDist * xDist) + (yDist * yDist)).toInt() < 2
+        return sqrt((xDist * xDist) + (yDist * yDist)).toInt() < 3
+    }
+
+    private fun isDamagedBlockInRange(cells: List<OpponentCell>): Boolean {
+        return cells.any { it.damaged }
     }
 
     override fun getCode(): Code {
