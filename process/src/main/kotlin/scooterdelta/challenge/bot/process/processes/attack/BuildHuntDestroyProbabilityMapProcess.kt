@@ -15,9 +15,9 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
             if (cell.damaged) {
 
                 if (damaged.isEmpty()) {
-                    cell.attackTypeProbability[Code.FIRE_CROSS_SHOT_HORIZONTAL] = cell.getAttackTypeProbability(Code.FIRE_SHOT) * 10
-                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_HORIZONTAL] = cell.getAttackTypeProbability(Code.FIRE_SHOT) * 5
-                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_VERTICAL] = cell.getAttackTypeProbability(Code.FIRE_SHOT) * 5
+                    cell.attackTypeProbability[Code.FIRE_CROSS_SHOT_HORIZONTAL] = cell.basicProbability * 10
+                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_HORIZONTAL] = cell.basicProbability * 5
+                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_VERTICAL] = cell.basicProbability * 5
                 }
 
             } else {
@@ -27,7 +27,7 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
                         .map { it }
 
                 if (!verticalHorizontalCells.isEmpty()) {
-                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.getAttackTypeProbability(Code.FIRE_SHOT) * 3
+                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
                 }
             }
         }

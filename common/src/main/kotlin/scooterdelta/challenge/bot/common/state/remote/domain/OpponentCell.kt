@@ -21,6 +21,9 @@ class OpponentCell(
 ) : BaseCell(x, y), Comparable<OpponentCell> {
 
     @JsonIgnore
+    val basicProbability: Long = 10L
+
+    @JsonIgnore
     val attackTypeProbability: MutableMap<Code, Long> = mutableMapOf()
 
     fun getAttackTypeProbability(code: Code): Long {

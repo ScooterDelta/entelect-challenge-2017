@@ -10,7 +10,7 @@ abstract class AbstractProbabilityCalculator : ProbabilityCalculator {
 
     override fun calculateProbability(cell: OpponentCell, map: Map<OpponentCell>) {
         val targetCells: List<OpponentCell> = getTargetCells(cell, map)
-        val probability: Long = cell.getAttackTypeProbability(FIRE_SHOT) * targetCells.size
+        val probability: Long = cell.basicProbability * targetCells.size
 
         cell.attackTypeProbability[getCode()] = probability
     }

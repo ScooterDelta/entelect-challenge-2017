@@ -10,7 +10,7 @@ class BuildProbabilityMapProcess : AbstractBuildProbabilityMapProcess() {
         val chance: Long
 
         if (!cell.missed && !cell.damaged) {
-            chance = 10
+            chance = cell.basicProbability
         } else {
             chance = 0
         }
