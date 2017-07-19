@@ -66,6 +66,12 @@
                 <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test-junit</artifactId>
+                <version>${kotlin.version}</version>
+                <scope>test</scope>
+            </dependency>
 
             <!--Dependency:-->
             <dependency>
@@ -90,7 +96,7 @@
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib</artifactId>
+                <artifactId>kotlin-stdlib-jre8</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
             <dependency>
@@ -157,6 +163,9 @@
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>
                     <version>${kotlin.version}</version>
+                    <configuration>
+                        <jvmTarget>1.8</jvmTarget>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>kapt</id>
@@ -165,7 +174,7 @@
                             </goals>
                             <configuration>
                                 <sourceDirs>
-                                    <sourceDir>src/main/kotlin</sourceDir>
+                                    <source>src/main/kotlin</source>
                                 </sourceDirs>
                                 <annotationProcessorPaths>
                                     <annotationProcessorPath>
@@ -183,7 +192,9 @@
                             </goals>
                             <configuration>
                                 <sourceDirs>
-                                    <sourceDir>src/main/kotlin</sourceDir>
+                                    <source>target/generated-sources/annotations</source>
+                                    <source>src/main/kotlin</source>
+                                    <source>target/generated-sources/kapt/compile</source>
                                 </sourceDirs>
                             </configuration>
                         </execution>
@@ -194,7 +205,7 @@
                             </goals>
                             <configuration>
                                 <sourceDirs>
-                                    <sourceDir>src/test/kotlin</sourceDir>
+                                    <source>src/test/kotlin</source>
                                 </sourceDirs>
                                 <annotationProcessorPaths>
                                     <annotationProcessorPath>
@@ -212,8 +223,8 @@
                             </goals>
                             <configuration>
                                 <sourceDirs>
-                                    <sourceDir>src/test/kotlin</sourceDir>
-                                    <sourceDir>target/generated-sources/kapt/test</sourceDir>
+                                    <source>src/test/kotlin</source>
+                                    <source>target/generated-sources/kapt/test</source>
                                 </sourceDirs>
                             </configuration>
                         </execution>
@@ -223,11 +234,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.plugin.version}</version>
-                    <configuration>
-                        <proc>none</proc>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
                     <executions>
                         <!-- Replacing default-compile as it is treated specially by maven -->
                         <execution>
