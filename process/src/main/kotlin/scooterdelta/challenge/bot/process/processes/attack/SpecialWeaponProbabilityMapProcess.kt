@@ -1,6 +1,7 @@
 package scooterdelta.challenge.bot.process.processes.attack
 
 import scooterdelta.challenge.bot.common.state.local.Map
+import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
 import scooterdelta.challenge.bot.process.processes.ProbabilityCalculator
 import javax.inject.Named
@@ -12,10 +13,10 @@ class SpecialWeaponProbabilityMapProcess(
 
 ) : AbstractBuildProbabilityMapProcess() {
 
-    override fun calculateProbability(cell: OpponentCell, map: Map<OpponentCell>) {
+    override fun calculateProbability(cell: OpponentCell, map: Map<OpponentCell>, gameState: GameState) {
         // Calculate probability for each weapon type
         for (probabilityCalculator in probabilityCalculators) {
-            probabilityCalculator.calculateProbability(cell, map)
+            probabilityCalculator.calculateProbability(cell, map, gameState)
         }
     }
 
