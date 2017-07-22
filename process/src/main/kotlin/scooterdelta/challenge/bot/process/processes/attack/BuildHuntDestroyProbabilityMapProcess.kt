@@ -27,11 +27,20 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
 
                 val verticalHorizontalCells: List<OpponentCell> = damaged
                         .filter { it.x == cell.x || it.y == cell.y }
+                        .filter { it.getPoint() != cell.getPoint() }
                         .map { it }
 
-                // TODO: Refine seek and destroy, prioritise lines (destroy ship length wise)
                 if (!verticalHorizontalCells.isEmpty()) {
-                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
+                    if (checkDamagedCellsIsolated(damaged, map)) {
+                        // Seek around isolated cell
+                        cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
+                    } else {
+                        // Find adjacent cells
+                        verticalHorizontalCells
+                                .mapNotNull { map.getCellInDirection(it, cell.determineDirection(it)) }
+                                .filter { it.damaged }
+                                .forEach { cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3 }
+                    }
                 }
             }
         }
@@ -44,6 +53,19 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
                 .filter { it.x == cell.x || it.y == cell.y }
                 .filter { it.getPoint() != cell.getPoint() }
                 .map { it }
+    }
+
+    private fun checkDamagedCellsIsolated(cells: List<OpponentCell>, map: Map<OpponentCell>): Boolean {
+        return cells.any { checkDamagedCellIsolated(it, map) }
+    }
+
+    private fun checkDamagedCellIsolated(cell: OpponentCell, map: Map<OpponentCell>): Boolean {
+        return map.findNAdjacentCells(cell, 1)
+                .filter { it.getPoint() != cell.getPoint() }
+                .filter { it.x == cell.x || it.y == cell.y }
+                .filter { it.damaged }
+                .map { it }
+                .isEmpty()
     }
 
     private fun findAdjacentDamagedCells(cell: OpponentCell, subCells: List<OpponentCell>): List<OpponentCell> {

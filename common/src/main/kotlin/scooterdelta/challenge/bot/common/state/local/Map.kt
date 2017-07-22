@@ -52,6 +52,15 @@ class Map<out T : BaseCell>(cells: List<T>) {
         return Map(findNAdjacentCells(cell, n))
     }
 
+    fun getCellInDirection(cell: BaseCell, direction: Direction): T? {
+        return when (direction) {
+            Direction.NORTH -> getCellFromMap(cell.x, cell.y + 1)
+            Direction.EAST -> getCellFromMap(cell.x + 1, cell.y)
+            Direction.SOUTH -> getCellFromMap(cell.x, cell.y - 1)
+            Direction.WEST -> getCellFromMap(cell.x - 1, cell.y)
+        }
+    }
+
     fun getCellFromMap(x: Int, y: Int): T? {
         val coordinateX = x - min.x
         val coordinateY = y - min.y
