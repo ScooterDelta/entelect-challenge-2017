@@ -45,7 +45,6 @@ class ProcessEngineTest {
                 ),
                 arrayListOf(
                         BuildProbabilityMapProcess(),
-                        BuildHuntDestroyProbabilityMapProcess(),
                         SpecialWeaponProbabilityMapProcess(arrayListOf(
                                 DoubleShotVerticalCalculator(),
                                 DoubleShotHorizontalCalculator(),
@@ -54,6 +53,11 @@ class ProcessEngineTest {
                                 CrossHorizontalShotCalculator(),
                                 SeekerMissileCalculator()
                         )),
+
+                        // RUN HUNT DESTROY LAST - Overrides previous probabilities while destroying ship
+                        BuildHuntDestroyProbabilityMapProcess(),
+
+                        // Select most likely weapon/location choice
                         SelectAttackCommandProcess(Random())
                 )
         )

@@ -12,18 +12,35 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
         if (!cell.missed && !cell.damaged) {
             val subCells: List<OpponentCell> = map.findNAdjacentCells(cell, 1)
             val damaged: List<OpponentCell> = findAdjacentDamagedCells(cell, subCells)
-            val verticalHorizontalDamagedCells: List<OpponentCell> = findGridAdjacentCells(cell, damaged)
 
-            if (!verticalHorizontalDamagedCells.isEmpty()) {
-                if (checkDamagedCellsIsolated(verticalHorizontalDamagedCells, map)) {
-                    // Seek around isolated cell
-                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
-                } else {
-                    // Find adjacent cells
-                    verticalHorizontalDamagedCells
-                            .mapNotNull { map.getCellInDirection(it, cell.determineDirection(it)) }
-                            .filter { it.damaged }
-                            .forEach { cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3 }
+            if (cell.damaged) {
+
+                val adjacent = findGridAdjacentCells(cell, subCells)
+                // TODO: Refine filter process, check for vertical vs horizontal for double shots
+                if (damaged.isEmpty() && adjacent.size == 4) {
+                    cell.attackTypeProbability[Code.FIRE_CROSS_SHOT_HORIZONTAL] = cell.basicProbability * 10
+                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_HORIZONTAL] = cell.basicProbability * 5
+                    cell.attackTypeProbability[Code.FIRE_DOUBLE_SHOT_VERTICAL] = cell.basicProbability * 5
+                }
+
+            } else {
+
+                val verticalHorizontalCells: List<OpponentCell> = damaged
+                        .filter { it.x == cell.x || it.y == cell.y }
+                        .filter { it.getPoint() != cell.getPoint() }
+                        .map { it }
+
+                if (!verticalHorizontalCells.isEmpty()) {
+                    if (checkDamagedCellsIsolated(damaged, map)) {
+                        // Seek around isolated cell
+                        cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
+                    } else {
+                        // Find adjacent cells
+                        verticalHorizontalCells
+                                .mapNotNull { map.getCellInDirection(it, cell.determineDirection(it)) }
+                                .filter { it.damaged }
+                                .forEach { cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3 }
+                    }
                 }
             }
         }
