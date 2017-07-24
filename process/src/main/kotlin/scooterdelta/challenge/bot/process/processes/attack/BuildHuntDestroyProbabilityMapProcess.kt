@@ -9,7 +9,7 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
 
     override fun calculateProbability(cell: OpponentCell, map: Map<OpponentCell>, gameState: GameState) {
 
-        if (!cell.missed) {
+        if (!cell.missed && !cell.damaged) {
             val subCells: List<OpponentCell> = map.findNAdjacentCells(cell, 1)
             val damaged: List<OpponentCell> = findAdjacentDamagedCells(cell, subCells)
             val verticalHorizontalDamagedCells: List<OpponentCell> = findGridAdjacentCells(cell, damaged)
