@@ -51,11 +51,14 @@ class ProcessModule(private val workingDirectory: File,
     fun provideAttackProcesses(): ArrayList<Process> {
         // Ordered list of attack processes
         return arrayListOf(
+                // Build probability map
                 BuildProbabilityMapProcess(),
-                SpecialWeaponProbabilityMapProcess(provideProbabilityCalculators()),
 
-                // RUN HUNT DESTROY LAST - Overrides previous probabilities while destroying ship
+                // RUN HUNT DESTROY - Increased probability useful when calculating weapon chances:
                 BuildHuntDestroyProbabilityMapProcess(),
+
+                // Calculate probabilities for different weapon types
+                SpecialWeaponProbabilityMapProcess(provideProbabilityCalculators()),
 
                 // Select most likely weapon/location choice
                 SelectAttackCommandProcess(Random())

@@ -28,7 +28,7 @@ class SeekerMissileCalculator : AbstractProbabilityCalculator() {
         val xDist: Double = (cell.x - otherCell.x).toDouble()
         val yDist: Double = (cell.y - otherCell.y).toDouble()
 
-        return sqrt((xDist * xDist) + (yDist * yDist)).toInt() < 3
+        return sqrt((xDist * xDist) + (yDist * yDist)) <= 2.0
     }
 
     private fun isDamagedBlockInRange(cells: List<OpponentCell>): Boolean {
