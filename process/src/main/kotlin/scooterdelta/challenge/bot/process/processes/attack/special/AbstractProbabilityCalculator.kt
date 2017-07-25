@@ -17,7 +17,7 @@ abstract class AbstractProbabilityCalculator : ProbabilityCalculator {
         var probability: Long = 0
 
         targetCells
-                .mapNotNull { cell.attackTypeProbability[FIRE_SHOT] }
+                .mapNotNull { it.attackTypeProbability[FIRE_SHOT] }
                 .forEach { probability += it }
 
         cell.attackTypeProbability[getCode()] = probability
