@@ -6,7 +6,8 @@ import scooterdelta.challenge.bot.common.lookup.StateLookup
 
 data class ProcessOutcomes(
         var command: Command,
-        var stateLookup: StateLookup
+        var stateLookup: StateLookup,
+        var gameMode: GameMode
 ) {
-    constructor() : this(NoActionCommand(), StateLookup.COMMAND)
+    constructor() : this(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
 }

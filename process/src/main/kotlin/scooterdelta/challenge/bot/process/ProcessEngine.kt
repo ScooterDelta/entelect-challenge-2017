@@ -3,10 +3,10 @@ package scooterdelta.challenge.bot.process
 import com.google.common.io.Files
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import scooterdelta.challenge.bot.common.command.Command
 import scooterdelta.challenge.bot.common.command.NoActionCommand
 import scooterdelta.challenge.bot.common.lookup.StateLookup
 import scooterdelta.challenge.bot.common.state.local.FileState
+import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
@@ -27,11 +27,11 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
     override fun run() {
         LOGGER.info(
                 "\n\n\n------------------------------------------\n" +
-                "                BOT STARTING                \n" +
-                "------------------------------------------\n\n\n")
+                        "                BOT STARTING                \n" +
+                        "------------------------------------------\n\n\n")
         try {
             val gameState: GameState = deserializer.deserialize(fileState.workingDirectory)
-            val processOutcomes: ProcessOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND)
+            val processOutcomes: ProcessOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
 
             LOGGER.info("Player Map:\n${gameState.playerMap.map.printMap()}")
             LOGGER.info("Opponent Map:\n${gameState.opponentMap.map.printMap()}")
