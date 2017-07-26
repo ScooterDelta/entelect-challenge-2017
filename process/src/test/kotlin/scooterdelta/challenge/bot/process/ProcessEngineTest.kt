@@ -1,10 +1,7 @@
 package scooterdelta.challenge.bot.process
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.common.collect.SortedSetMultimap
-import com.google.common.collect.TreeMultimap
 import com.google.common.io.Resources
-import org.junit.Before
 import org.junit.Test
 import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
@@ -45,6 +42,7 @@ class ProcessEngineTest {
                 ),
                 arrayListOf(
                         BuildProbabilityMapProcess(),
+                        BuildHuntDestroyProbabilityMapProcess(),
                         SpecialWeaponProbabilityMapProcess(arrayListOf(
                                 DoubleShotVerticalCalculator(),
                                 DoubleShotHorizontalCalculator(),
@@ -53,10 +51,6 @@ class ProcessEngineTest {
                                 CrossHorizontalShotCalculator(),
                                 SeekerMissileCalculator()
                         )),
-
-                        // RUN HUNT DESTROY LAST - Overrides previous probabilities while destroying ship
-                        BuildHuntDestroyProbabilityMapProcess(),
-
                         // Select most likely weapon/location choice
                         SelectAttackCommandProcess(Random())
                 )
