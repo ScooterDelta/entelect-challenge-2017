@@ -8,19 +8,17 @@ import java.lang.Math.sqrt
 class SeekerMissileCalculator : AbstractProbabilityCalculator() {
 
     override fun getTargetCells(cell: OpponentCell, map: Map<OpponentCell>): List<OpponentCell> {
-        val filteredList: MutableList<OpponentCell> = mutableListOf()
-        for (y in cell.y - 2..cell.y + 2) {
-            (cell.x - 2..cell.x + 2)
-                    .mapNotNull { x -> map.getCellFromMap(x, y) }
-                    .filter { checkValidDistance(cell, it) }
-                    .filter { !it.damaged }
-                    .filter { !it.missed }
-                    .mapTo(filteredList) { it }
-        }
+        val cellsInRange: List<OpponentCell> = getCellsInMissileRange(cell, map)
+
         // Will re-hit a damaged cell in range if found
-        if (isDamagedBlockInRange(filteredList)) {
-            filteredList.clear()
+        if (isDamagedBlockInRange(cellsInRange)) {
+            return emptyList()
         }
+
+        val filteredList: List<OpponentCell> = cellsInRange
+                .filterNot { it.damaged }
+                .filterNot { it.missed }
+                .map { it }
         return filteredList.toList()
     }
 
@@ -29,6 +27,12 @@ class SeekerMissileCalculator : AbstractProbabilityCalculator() {
         val yDist: Double = (cell.y - otherCell.y).toDouble()
 
         return sqrt((xDist * xDist) + (yDist * yDist)) <= 2.0
+    }
+
+    private fun getCellsInMissileRange(cell: OpponentCell, map: Map<OpponentCell>): List<OpponentCell> {
+        return map.findNAdjacentCells(cell, 2)
+                .filter { checkValidDistance(cell, it) }
+                .map { it }
     }
 
     private fun isDamagedBlockInRange(cells: List<OpponentCell>): Boolean {
