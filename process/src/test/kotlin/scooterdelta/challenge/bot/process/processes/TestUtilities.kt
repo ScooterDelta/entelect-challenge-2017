@@ -38,15 +38,20 @@ fun generateNbyNMapOpponentCell(xSize: Int, ySize: Int): Map<OpponentCell> {
 }
 
 fun createGameState(cells: List<OpponentCell>): GameState {
+    return createGameState(
+            cells,
+            listOf(createSingleShopShip(ShipType.BATTLESHIP, 2)),
+            listOf(OpponentShip(false, ShipType.BATTLESHIP))
+    )
+}
+
+fun createGameState(cells: List<OpponentCell>, ships: List<Ship>, opponentShips: List<OpponentShip>): GameState {
     val gameState: GameState = GameState(
             PlayerMap(
-                    BattleshipPlayer(0, "",
-                            listOf(Ship(false, true, ShipType.BATTLESHIP,
-                                    arrayListOf(Weapon(WeaponType.SINGLE_SHOT, 1)),
-                                    arrayListOf(Cell(0, 0, false, false), Cell(1, 1, false, false)))),
-                            0, 2, false, false, 0, 0, 1, 'A'),
+                    BattleshipPlayer(0, "", ships, 0, 2,
+                            false, false, 0, 0, 1, 'A'),
                     listOf(), 0, 0),
-            OpponentMap(true, 0, "", listOf(OpponentShip(false, ShipType.BATTLESHIP)), cells),
+            OpponentMap(true, 0, "", opponentShips, cells),
             "0",
             1,
             1,
@@ -54,6 +59,11 @@ fun createGameState(cells: List<OpponentCell>): GameState {
             2)
 
     return gameState
+}
+
+fun createSingleShopShip(shipType: ShipType, shipSize: Int): Ship {
+    val cells: List<Cell> = (0 until shipSize).map { Cell(0, it, false, false) }
+    return Ship(false, true, shipType, arrayListOf(Weapon(WeaponType.SINGLE_SHOT, 1)), cells)
 }
 
 private fun createOpponentCellFlatProbability(x: Int, y: Int, damaged: Boolean, missed: Boolean): OpponentCell {
