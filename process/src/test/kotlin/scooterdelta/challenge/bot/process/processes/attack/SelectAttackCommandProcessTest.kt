@@ -7,11 +7,10 @@ import org.junit.Test
 import scooterdelta.challenge.bot.common.command.AttackCommand
 import scooterdelta.challenge.bot.common.command.Command
 import scooterdelta.challenge.bot.common.lookup.Code
-import scooterdelta.challenge.bot.common.lookup.ShipType
-import scooterdelta.challenge.bot.common.lookup.WeaponType
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
-import scooterdelta.challenge.bot.common.state.remote.*
-import scooterdelta.challenge.bot.common.state.remote.domain.*
+import scooterdelta.challenge.bot.common.state.remote.GameState
+import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
+import scooterdelta.challenge.bot.common.state.remote.domain.Point
 import scooterdelta.challenge.bot.process.processes.createGameState
 import java.util.*
 
@@ -36,6 +35,22 @@ class SelectAttackCommandProcessTest {
         selectAttackCommandProcess.process(gameState, processOutcomes)
 
         val expectedValue: Command = AttackCommand(Point(1, 1), Code.FIRE_SHOT)
+        assertThat("The correct cell is selected", processOutcomes.command, equalTo(expectedValue))
+    }
+
+    @Test fun testProbabilityOrderingReversed() {
+        val cells: List<OpponentCell> = arrayListOf(
+                buildOpponentCellWithProbability(0, 0, false, false, 2),
+                buildOpponentCellWithProbability(0, 1, false, false, 1),
+                buildOpponentCellWithProbability(1, 0, false, false, 1),
+                buildOpponentCellWithProbability(1, 1, false, false, 0)
+        )
+        val gameState: GameState = createGameState(cells)
+        val processOutcomes: ProcessOutcomes = ProcessOutcomes()
+
+        selectAttackCommandProcess.process(gameState, processOutcomes)
+
+        val expectedValue: Command = AttackCommand(Point(0, 0), Code.FIRE_SHOT)
         assertThat("The correct cell is selected", processOutcomes.command, equalTo(expectedValue))
     }
 

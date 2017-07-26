@@ -34,12 +34,14 @@ class SelectAttackCommandProcess(private val random: Random) : Process {
     }
 
     private fun getMaxProbabilityCheapestEnergy(sortedMap: SetMultimap<Long, OpponentCellAttackCodeGroup>): OpponentCellAttackCodeGroup {
-        val sortedSet: MutableSet<OpponentCellAttackCodeGroup> = sortedMap[sortedMap.keySet().last()]
+        val keySet: SortedSet<Long> = TreeSet(sortedMap.keySet())
+        val sortedSet: MutableSet<OpponentCellAttackCodeGroup> = sortedMap[keySet.last()]
 
         val energyMap: SetMultimap<Int, OpponentCellAttackCodeGroup> = HashMultimap.create()
         sortedSet.forEach { energyMap.put(it.weapon.energyRequired, it) }
 
-        val energySet: MutableSet<OpponentCellAttackCodeGroup> = energyMap[energyMap.keySet().first()]
+        val energyKeys: SortedSet<Int> = TreeSet(energyMap.keySet())
+        val energySet: MutableSet<OpponentCellAttackCodeGroup> = energyMap[energyKeys.first()]
         return energySet.elementAt(random.nextInt(energySet.size))
     }
 
