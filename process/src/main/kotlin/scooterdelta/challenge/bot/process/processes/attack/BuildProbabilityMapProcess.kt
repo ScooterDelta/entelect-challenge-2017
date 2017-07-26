@@ -29,15 +29,11 @@ class BuildProbabilityMapProcess : AbstractBuildProbabilityMapProcess() {
     }
 
     private fun getMinEnemyShipLength(gameState: GameState): Int {
-        var counter = Int.MAX_VALUE
-        gameState.opponentMap.ships
+        return gameState.opponentMap.ships
                 .filterNot { it.destroyed }
                 .mapNotNull { findEquivalentLocalShip(it, gameState) }
                 .map { it.cells.size }
-                .filter { it < counter }
-                .forEach { counter = it }
-        // Return 2 - The current shortest ship if nothing else is found
-        return if (counter == Int.MAX_VALUE) 2 else counter
+                .min() ?: 2
     }
 
     private fun findEquivalentLocalShip(opponentShip: OpponentShip, gameState: GameState): Ship? {
