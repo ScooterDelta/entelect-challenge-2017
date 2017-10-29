@@ -64,7 +64,7 @@ class RandomPaddedPlacement(private val randomGenerator: Random,
     private fun checkNoOverlappingShips(rectangle: Rectangle,
                                         shipPlacements: MutableList<PlaceShipGroup>): Boolean {
         return shipPlacements
-                .map { it.getPaddedRect(padding) }
+                .map { it.getPaddedRect(0) }
                 .none { isOverlapping(rectangle, it) }
     }
 

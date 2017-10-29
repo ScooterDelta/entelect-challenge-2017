@@ -46,9 +46,9 @@ class ProcessModule(private val workingDirectory: File,
         return arrayListOf(
                 SelectSizePlacementProcess(mapOf(
                         // Map size to placement algorithms
-                        1 to RandomPlacementImpl(Random()),
-                        2 to RandomPaddedPlacement(Random(), 1),
-                        3 to RandomPaddedPlacement(Random(), 1)
+                        7 to RandomPlacementImpl(Random()),
+                        10 to RandomPaddedPlacement(Random(), 1),
+                        14 to RandomPaddedPlacement(Random(), 1)
                 ),
                         // Default for unknown map size
                         RandomPlacementImpl(Random())
