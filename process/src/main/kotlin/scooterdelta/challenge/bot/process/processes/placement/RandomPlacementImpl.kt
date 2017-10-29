@@ -15,10 +15,10 @@ import java.util.*
 
 class RandomPlacementImpl(private val randomGenerator: Random) : Process {
 
-    val LOGGER: Logger = LoggerFactory.getLogger(RandomPlacementImpl::class.java)
+    private val LOGGER: Logger = LoggerFactory.getLogger(RandomPlacementImpl::class.java)
 
     override fun process(gameState: GameState, processOutcomes: ProcessOutcomes) {
-        val placementCommands: PlaceShipCommand = PlaceShipCommand(
+        val placementCommands = PlaceShipCommand(
                 placeShipsRandomly(gameState)
         )
         processOutcomes.command = placementCommands
@@ -27,12 +27,12 @@ class RandomPlacementImpl(private val randomGenerator: Random) : Process {
         LOGGER.info("Ships are being placed at: $placementCommands")
     }
 
-    fun placeShipsRandomly(gameState: GameState): List<PlaceShipGroup> {
+    private fun placeShipsRandomly(gameState: GameState): List<PlaceShipGroup> {
         val shipPlacements: MutableList<PlaceShipGroup> = mutableListOf()
         for (ship in gameState.playerMap.owner.ships) {
             var placeShipGroup: PlaceShipGroup
             do {
-                val point: Point = Point(
+                val point = Point(
                         generateRandom(0, gameState.mapDimension),
                         generateRandom(0, gameState.mapDimension)
                 )
@@ -46,9 +46,9 @@ class RandomPlacementImpl(private val randomGenerator: Random) : Process {
         return shipPlacements.toList()
     }
 
-    fun validLocation(placeShipGroup: PlaceShipGroup,
-                      gameState: GameState,
-                      shipPlacements: MutableList<PlaceShipGroup>): Boolean {
+    private fun validLocation(placeShipGroup: PlaceShipGroup,
+                              gameState: GameState,
+                              shipPlacements: MutableList<PlaceShipGroup>): Boolean {
         val endPoint: Point = getEndPoint(placeShipGroup.point, placeShipGroup.direction, placeShipGroup.shipLength)
 
         // Check valid borders
@@ -84,11 +84,11 @@ class RandomPlacementImpl(private val randomGenerator: Random) : Process {
         return (r in 0.0..1.0) && (s in 0.0..1.0)
     }
 
-    fun validPoint(point: Point, gameState: GameState): Boolean {
+    private fun validPoint(point: Point, gameState: GameState): Boolean {
         return point.x >= 0 && point.y >= 0 && point.x < gameState.mapDimension && point.y < gameState.mapDimension
     }
 
-    fun getEndPoint(point: Point, direction: Direction, size: Int): Point {
+    private fun getEndPoint(point: Point, direction: Direction, size: Int): Point {
         when (direction) {
             Direction.NORTH -> {
                 return Point(point.x, point.y + size)
@@ -108,7 +108,7 @@ class RandomPlacementImpl(private val randomGenerator: Random) : Process {
         }
     }
 
-    fun generateRandom(minVal: Int, maxVal: Int): Int {
+    private fun generateRandom(minVal: Int, maxVal: Int): Int {
         return randomGenerator.nextInt(maxVal - minVal) + minVal
     }
 }
