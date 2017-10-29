@@ -16,7 +16,8 @@ abstract class AbstractBuildProbabilityMapProcess : Process, ProbabilityCalculat
         opponentMap.cells
                 .parallelStream()
                 .forEach {
-                    it.parallelStream()
+                    it
+                            .parallelStream()
                             .forEach { calculateProbability(it, gameState, processOutcomes) }
                 }
     }

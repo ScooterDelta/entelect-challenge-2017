@@ -1,7 +1,7 @@
 package scooterdelta.challenge.bot.process.converter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -17,9 +17,7 @@ class GameStateDeserializerTest {
 
     @Before
     fun setUp() {
-        val objectMapper = ObjectMapper()
-        objectMapper.registerModule(KotlinModule())
-        gameStateDeserializer = GameStateDeserializer(objectMapper)
+        gameStateDeserializer = GameStateDeserializer(ObjectMapper().registerKotlinModule())
     }
 
     @Test

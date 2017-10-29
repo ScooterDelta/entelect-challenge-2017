@@ -1,7 +1,7 @@
 package scooterdelta.challenge.bot.process
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.google.common.io.Resources
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.junit.Test
 import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
@@ -36,7 +36,7 @@ class ProcessEngineTest {
     private fun buildProcessEngine(workingDir: File): ProcessEngine {
         return ProcessEngine(
                 FileState(workingDir, PLAYER_KEY),
-                GameStateDeserializer(ObjectMapper()),
+                GameStateDeserializer(ObjectMapper().registerKotlinModule()),
                 arrayListOf(
                         RandomPlacementImpl(Random())
                 ),

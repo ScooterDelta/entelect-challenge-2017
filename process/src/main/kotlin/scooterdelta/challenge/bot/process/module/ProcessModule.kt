@@ -1,7 +1,7 @@
 package scooterdelta.challenge.bot.process.module
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import dagger.Module
 import dagger.Provides
 import scooterdelta.challenge.bot.common.state.local.FileState
@@ -32,9 +32,7 @@ class ProcessModule(private val workingDirectory: File,
 
     @Provides
     fun provideObjectMapper(): ObjectMapper {
-        val objectMapper = ObjectMapper()
-        objectMapper.registerModule(KotlinModule())
-        return objectMapper
+        return ObjectMapper().registerKotlinModule()
     }
 
     @Provides

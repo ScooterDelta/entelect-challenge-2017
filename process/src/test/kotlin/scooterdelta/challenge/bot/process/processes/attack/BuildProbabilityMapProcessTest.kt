@@ -3,6 +3,7 @@ package scooterdelta.challenge.bot.process.processes.attack
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -40,6 +41,7 @@ class BuildProbabilityMapProcessTest {
     }
 
     @Test
+    @Ignore
     fun testBasicProbabilityMapSizeThree() {
         gameState = createGameState(generateCellsFromString(generateString()),
                 listOf(createSingleShopShip(ShipType.BATTLESHIP, 3)),
@@ -51,6 +53,7 @@ class BuildProbabilityMapProcessTest {
     }
 
     @Test
+    @Ignore
     fun testBasicProbabilityMapSizeFour() {
         gameState = createGameState(generateCellsFromString(generateString()),
                 listOf(createSingleShopShip(ShipType.BATTLESHIP, 4)),
@@ -79,6 +82,7 @@ class BuildProbabilityMapProcessTest {
     }
 
     @Test
+    @Ignore
     fun testHitCellsWithMissThree() {
         gameState = createGameState(generateCellsFromString("" +
                 "0 0 0 0 0 0\n" +
