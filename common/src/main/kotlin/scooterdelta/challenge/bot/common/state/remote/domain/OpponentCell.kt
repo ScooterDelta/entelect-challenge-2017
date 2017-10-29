@@ -16,7 +16,10 @@ class OpponentCell(
         val damaged: Boolean,
 
         @JsonProperty("Missed")
-        val missed: Boolean
+        val missed: Boolean,
+
+        @JsonProperty("ShieldHit")
+        val shieldHit: Boolean
 
 ) : BaseCell(x, y), Comparable<OpponentCell> {
 
@@ -31,15 +34,18 @@ class OpponentCell(
     }
 
     override fun printContent(): String {
-        when {
+        return when {
             missed -> {
-                return "+"
+                "+"
             }
             damaged -> {
-                return "X"
+                "X"
+            }
+            shieldHit -> {
+                "@"
             }
             else -> {
-                return "0"
+                "0"
             }
         }
     }

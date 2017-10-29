@@ -16,7 +16,7 @@ import java.util.*
 
 class SelectAttackCommandProcessTest {
 
-    lateinit var selectAttackCommandProcess: SelectAttackCommandProcess
+    private lateinit var selectAttackCommandProcess: SelectAttackCommandProcess
 
     @Before fun setUp() {
         selectAttackCommandProcess = SelectAttackCommandProcess(Random())
@@ -30,7 +30,7 @@ class SelectAttackCommandProcessTest {
                 buildOpponentCellWithProbability(1, 1, false, false, 2)
         )
         val gameState: GameState = createGameState(cells)
-        val processOutcomes: ProcessOutcomes = ProcessOutcomes()
+        val processOutcomes = ProcessOutcomes()
 
         selectAttackCommandProcess.process(gameState, processOutcomes)
 
@@ -46,7 +46,7 @@ class SelectAttackCommandProcessTest {
                 buildOpponentCellWithProbability(1, 1, false, false, 0)
         )
         val gameState: GameState = createGameState(cells)
-        val processOutcomes: ProcessOutcomes = ProcessOutcomes()
+        val processOutcomes = ProcessOutcomes()
 
         selectAttackCommandProcess.process(gameState, processOutcomes)
 
@@ -55,7 +55,7 @@ class SelectAttackCommandProcessTest {
     }
 
     private fun buildOpponentCellWithProbability(x: Int, y: Int, damaged: Boolean, missed: Boolean, chance: Long): OpponentCell {
-        val opponentCell: OpponentCell = OpponentCell(x, y, damaged, missed)
+        val opponentCell = OpponentCell(x, y, damaged, missed, false)
         opponentCell.attackTypeProbability[Code.FIRE_SHOT] = chance
         return opponentCell
     }

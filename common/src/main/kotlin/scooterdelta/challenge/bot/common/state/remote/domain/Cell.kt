@@ -11,17 +11,35 @@ class Cell(
         y: Int,
 
         @JsonProperty("Occupied")
-        val occupied: Boolean,
+        private val occupied: Boolean,
 
         @JsonProperty("Hit")
-        val hit: Boolean
+        private val hit: Boolean,
+
+        @JsonProperty("Shielded")
+        private val shielded: Boolean,
+
+        @JsonProperty("ShieldHit")
+        private val shieldHit: Boolean
 
 ) : BaseCell(x, y) {
     override fun printContent(): String {
-        when {
-            occupied -> {return "+"}
-            hit -> {return "X"}
-            else -> {return "0"}
+        return when {
+            occupied -> {
+                "+"
+            }
+            hit -> {
+                "X"
+            }
+            shieldHit -> {
+                "@"
+            }
+            shielded -> {
+                "%"
+            }
+            else -> {
+                "0"
+            }
         }
     }
 

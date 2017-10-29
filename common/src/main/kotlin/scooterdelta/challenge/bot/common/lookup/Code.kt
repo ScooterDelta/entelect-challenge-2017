@@ -64,5 +64,10 @@ enum class Code(val value: Int,
      *     0 0 0
      *       0
      */
-    FIRE_SEEKER_MISSILE(7, WeaponType.SEEKER_MISSILE);
+    FIRE_SEEKER_MISSILE(7, WeaponType.SEEKER_MISSILE),
+
+    /**
+     * Shield a ship.
+     */
+    SHIELD(8, WeaponType.NONE);
 }

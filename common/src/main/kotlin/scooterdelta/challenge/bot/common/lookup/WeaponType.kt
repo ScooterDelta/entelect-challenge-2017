@@ -7,7 +7,7 @@ enum class WeaponType {
     @JsonProperty("SingleShot")
     SINGLE_SHOT,
 
-    @JsonProperty("SeekerMissle")
+    @JsonProperty("SeekerMissile")
     SEEKER_MISSILE,
 
     @JsonProperty("DoubleShot")

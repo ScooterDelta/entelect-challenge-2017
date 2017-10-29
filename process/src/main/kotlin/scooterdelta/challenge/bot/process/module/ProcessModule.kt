@@ -12,7 +12,9 @@ import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapPr
 import scooterdelta.challenge.bot.process.processes.attack.SelectAttackCommandProcess
 import scooterdelta.challenge.bot.process.processes.attack.SpecialWeaponProbabilityMapProcess
 import scooterdelta.challenge.bot.process.processes.attack.special.*
+import scooterdelta.challenge.bot.process.processes.placement.RandomPaddedPlacement
 import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
+import scooterdelta.challenge.bot.process.processes.placement.SelectSizePlacementProcess
 import java.io.File
 import java.util.*
 import javax.inject.Named
@@ -42,7 +44,15 @@ class ProcessModule(private val workingDirectory: File,
     fun providePlacementProcesses(): ArrayList<Process> {
         // Ordered list of placement processes
         return arrayListOf(
-                RandomPlacementImpl(Random())
+                SelectSizePlacementProcess(mapOf(
+                        // Map size to placement algorithms
+                        1 to RandomPlacementImpl(Random()),
+                        2 to RandomPaddedPlacement(Random(), 1),
+                        3 to RandomPaddedPlacement(Random(), 1)
+                ),
+                        // Default for unknown map size
+                        RandomPlacementImpl(Random())
+                )
         )
     }
 

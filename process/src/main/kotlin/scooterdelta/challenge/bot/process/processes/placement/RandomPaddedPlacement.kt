@@ -7,15 +7,17 @@ import scooterdelta.challenge.bot.common.command.data.PlaceShipGroup
 import scooterdelta.challenge.bot.common.lookup.StateLookup
 import scooterdelta.challenge.bot.common.state.local.Direction
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
+import scooterdelta.challenge.bot.common.state.local.Rectangle
+import scooterdelta.challenge.bot.common.state.local.helper.fromInt
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.common.state.remote.domain.Point
-import scooterdelta.challenge.bot.common.state.local.helper.fromInt
 import scooterdelta.challenge.bot.process.processes.Process
 import java.util.*
 
-class RandomPlacementImpl(private val randomGenerator: Random) : Process {
+class RandomPaddedPlacement(private val randomGenerator: Random,
+                            private val padding: Int) : Process {
 
-    private val LOGGER: Logger = LoggerFactory.getLogger(RandomPlacementImpl::class.java)
+    private val LOGGER: Logger = LoggerFactory.getLogger(RandomPaddedPlacement::class.java)
 
     override fun process(gameState: GameState, processOutcomes: ProcessOutcomes) {
         val placementCommands = PlaceShipCommand(
@@ -50,38 +52,34 @@ class RandomPlacementImpl(private val randomGenerator: Random) : Process {
                               gameState: GameState,
                               shipPlacements: MutableList<PlaceShipGroup>): Boolean {
         val endPoint: Point = placeShipGroup.getEndPoint()
+        val rect: Rectangle = placeShipGroup.getPaddedRect(padding)
 
         // Check valid borders
         if (validPoint(placeShipGroup.point, gameState) && validPoint(endPoint, gameState)) {
-            return checkNoOverlappingShips(placeShipGroup.point, endPoint, shipPlacements)
+            return checkNoOverlappingShips(rect, shipPlacements)
         }
         return false
     }
 
-    private fun checkNoOverlappingShips(startPoint: Point,
-                                        endPoint: Point,
+    private fun checkNoOverlappingShips(rectangle: Rectangle,
                                         shipPlacements: MutableList<PlaceShipGroup>): Boolean {
-        for (shipPlacement in shipPlacements) {
-            val otherShipEnd: Point = shipPlacement.getEndPoint()
-
-            if (isOverlapping(startPoint, endPoint, shipPlacement.point, otherShipEnd)) {
-                return false
-            }
-        }
-        return true
+        return shipPlacements
+                .map { it.getPaddedRect(padding) }
+                .none { isOverlapping(rectangle, it) }
     }
 
-    private fun isOverlapping(a: Point, b: Point, c: Point, d: Point): Boolean {
-        val denom: Int = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x))
-        val numOne: Int = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y))
-        val numTwo: Int = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y))
+    private fun isOverlapping(rectangle: Rectangle, otherRectangle: Rectangle): Boolean {
+        val xOverlap: Boolean = valueInRange(rectangle.point.x, otherRectangle.point.x, otherRectangle.point.x + otherRectangle.width)
+                || valueInRange(otherRectangle.point.x, rectangle.point.x, rectangle.point.x + rectangle.width)
 
-        if (denom == 0) return numOne == 0 && numTwo == 0
+        val yOverlap: Boolean = valueInRange(rectangle.point.y, otherRectangle.point.y, otherRectangle.point.y + otherRectangle.height)
+                || valueInRange(otherRectangle.point.y, rectangle.point.y, rectangle.point.y + rectangle.height)
 
-        val r: Double = numOne.toDouble() / denom.toDouble()
-        val s: Double = numTwo.toDouble() / denom.toDouble()
+        return xOverlap && yOverlap
+    }
 
-        return (r in 0.0..1.0) && (s in 0.0..1.0)
+    private fun valueInRange(value: Int, minVal: Int, maxVal: Int): Boolean {
+        return value in minVal..maxVal
     }
 
     private fun validPoint(point: Point, gameState: GameState): Boolean {

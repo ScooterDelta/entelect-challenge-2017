@@ -2,6 +2,7 @@ package scooterdelta.challenge.bot.common.state.remote
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import scooterdelta.challenge.bot.common.state.remote.domain.Ship
+import scooterdelta.challenge.bot.common.state.remote.domain.Shield
 
 data class BattleshipPlayer(
 
@@ -36,5 +37,8 @@ data class BattleshipPlayer(
         val shipsRemaining: Int,
 
         @JsonProperty("Key")
-        val key: Char
+        val key: Char,
+
+        @JsonProperty("Shield")
+        val shield: Shield
 )
