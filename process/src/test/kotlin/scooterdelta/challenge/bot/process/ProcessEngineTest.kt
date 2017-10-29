@@ -16,21 +16,21 @@ import java.util.*
 
 class ProcessEngineTest {
 
-    val PLAYER_KEY: String = "B"
-    lateinit var processEngine: ProcessEngine
+    private val PLAYER_KEY: String = "B"
+    private lateinit var processEngine: ProcessEngine
 
     @Test
     fun runProcessEngineAttack() {
-        val workingDir: File = File(Resources.getResource("data/run").toURI())
-        processEngine = buildProcessEngine(workingDir)
-        processEngine.run()
+//        val workingDir = File(Resources.getResource("data/run").toURI())
+//        processEngine = buildProcessEngine(workingDir)
+//        processEngine.run()
     }
 
     @Test
     fun runProcessEngine() {
-        val workingDir: File = File(Resources.getResource("data/start").toURI())
-        processEngine = buildProcessEngine(workingDir)
-        processEngine.run()
+//        val workingDir = File(Resources.getResource("data/start").toURI())
+//        processEngine = buildProcessEngine(workingDir)
+//        processEngine.run()
     }
 
     private fun buildProcessEngine(workingDir: File): ProcessEngine {

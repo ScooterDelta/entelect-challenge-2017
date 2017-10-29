@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.common.state.remote.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import scooterdelta.challenge.bot.common.state.local.Direction
 
@@ -12,6 +13,7 @@ abstract class BaseCell(
         val y: Int
 ) {
 
+    @JsonIgnore
     fun getPoint(): Point {
         return Point(x, y)
     }

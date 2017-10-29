@@ -3,8 +3,10 @@ package scooterdelta.challenge.bot.process
 import com.google.common.io.Files
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import scooterdelta.challenge.bot.common.command.AttackCommand
 import scooterdelta.challenge.bot.common.command.NoActionCommand
 import scooterdelta.challenge.bot.common.lookup.StateLookup
+import scooterdelta.challenge.bot.common.state.game.UserState
 import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
@@ -31,21 +33,29 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
                         "------------------------------------------\n\n\n")
         try {
             val gameState: GameState = deserializer.deserialize(fileState.workingDirectory)
-            val processOutcomes: ProcessOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
+            val processOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
 
             LOGGER.info("Player Map:\n${gameState.playerMap.map.printMap()}")
             LOGGER.info("Opponent Map:\n${gameState.opponentMap.map.printMap()}")
 
+            val userState: UserState
             when (gameState.phase) {
                 1 -> {
+                    // Ensure clean slate of user state
+                    deserializer.deleteUserState()
+                    userState = UserState(mutableListOf())
                     callPlacementProcess(gameState, processOutcomes)
                 }
                 else -> {
+                    userState = deserializer.readUserState()
                     callAttackProcess(gameState, processOutcomes)
                 }
             }
 
             printCommand(processOutcomes)
+
+            updateUserState(processOutcomes, userState)
+            deserializer.saveUserState(userState)
 
         } catch (ex: IOException) {
             LOGGER.error("Error extracting state object:", ex)
@@ -69,7 +79,14 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
     }
 
     private fun printCommand(processOutcomes: ProcessOutcomes) {
-        val file: File = File(fileState.workingDirectory, processOutcomes.stateLookup.location)
+        val file = File(fileState.workingDirectory, processOutcomes.stateLookup.location)
         Files.asCharSink(file, Charset.defaultCharset()).write(processOutcomes.command.printCommand())
+    }
+
+    private fun updateUserState(processOutcomes: ProcessOutcomes, userState: UserState) {
+        if (processOutcomes.command is AttackCommand) {
+            val attackCommand = processOutcomes.command as AttackCommand
+            userState.attackCommands!!.add(attackCommand)
+        }
     }
 }
