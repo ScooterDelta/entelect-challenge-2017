@@ -44,12 +44,13 @@ class ProcessModule(private val workingDirectory: File,
     fun providePlacementProcesses(): ArrayList<Process> {
         // Ordered list of placement processes
         return arrayListOf(
-                SelectSizePlacementProcess(mapOf(
-                        // Map size to placement algorithms
-                        7 to RandomPlacementImpl(Random()),
-                        10 to RandomPaddedPlacement(Random(), 1),
-                        14 to RandomPaddedPlacement(Random(), 1)
-                ),
+                SelectSizePlacementProcess(
+                        mapOf(
+                                // Map size to placement algorithms
+                                7 to RandomPlacementImpl(Random()),
+                                10 to RandomPaddedPlacement(Random(), 1),
+                                14 to RandomPaddedPlacement(Random(), 1)
+                        ),
                         // Default for unknown map size
                         RandomPlacementImpl(Random())
                 )
