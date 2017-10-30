@@ -8,10 +8,7 @@ import scooterdelta.challenge.bot.common.state.local.FileState
 import scooterdelta.challenge.bot.process.converter.GameStateDeserializer
 import scooterdelta.challenge.bot.process.processes.ProbabilityCalculator
 import scooterdelta.challenge.bot.process.processes.Process
-import scooterdelta.challenge.bot.process.processes.attack.BuildHuntDestroyProbabilityMapProcess
-import scooterdelta.challenge.bot.process.processes.attack.BuildProbabilityMapProcess
-import scooterdelta.challenge.bot.process.processes.attack.SelectAttackCommandProcess
-import scooterdelta.challenge.bot.process.processes.attack.SpecialWeaponProbabilityMapProcess
+import scooterdelta.challenge.bot.process.processes.attack.*
 import scooterdelta.challenge.bot.process.processes.attack.special.*
 import scooterdelta.challenge.bot.process.processes.placement.RandomPaddedPlacement
 import scooterdelta.challenge.bot.process.processes.placement.RandomPlacementImpl
@@ -67,6 +64,9 @@ class ProcessModule(private val workingDirectory: File,
 
                 // RUN HUNT DESTROY - Calculates probabilities while destroying ship
                 BuildHuntDestroyProbabilityMapProcess(),
+                // RUN HUNT DESTROY - Completely surrounds target ship instead of firing up line -
+                // Slightly lower probability to previous calculator
+                BuildHuntDestroySurroundProcess(),
 
                 // Calculate special weapon probabilities
                 SpecialWeaponProbabilityMapProcess(provideProbabilityCalculators()),

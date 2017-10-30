@@ -10,9 +10,7 @@ import scooterdelta.challenge.bot.common.state.remote.domain.Ship
 class BuildProbabilityMapProcess : AbstractBuildProbabilityMapProcess() {
 
     override fun calculateProbability(cell: OpponentCell, gameState: GameState, processOutcomes: ProcessOutcomes) {
-//        TODO: Temporarily removing min ship length calculation - due to perpendicular ship destroy algorithm error.
-//        val minShipLength = getMinEnemyShipLength(gameState)
-        val minShipLength = 2
+        val minShipLength = getMinEnemyShipLength(gameState)
         val chance = if (!cell.missed && !cell.damaged && cellInCheckerBlock(cell, minShipLength)) {
             cell.basicProbability
         } else {
