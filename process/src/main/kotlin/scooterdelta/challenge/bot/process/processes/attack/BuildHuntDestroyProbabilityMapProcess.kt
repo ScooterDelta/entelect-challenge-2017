@@ -5,8 +5,24 @@ import scooterdelta.challenge.bot.common.state.local.Map
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.common.state.remote.domain.OpponentCell
+import scooterdelta.challenge.bot.process.processes.ProbabilityCalculator
+import scooterdelta.challenge.bot.process.processes.Process
 
-class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess() {
+class BuildHuntDestroyProbabilityMapProcess : Process, ProbabilityCalculator {
+
+    override fun process(gameState: GameState, processOutcomes: ProcessOutcomes) {
+
+        val opponentMap: Map<OpponentCell> = gameState.opponentMap.map
+
+        // Only apply probability map processes if the game mode is set to spend
+        opponentMap.cells
+                .parallelStream()
+                .forEach {
+                    it
+                            .parallelStream()
+                            .forEach { calculateProbability(it, gameState, processOutcomes) }
+                }
+    }
 
     override fun calculateProbability(cell: OpponentCell, gameState: GameState, processOutcomes: ProcessOutcomes) {
 
@@ -19,13 +35,13 @@ class BuildHuntDestroyProbabilityMapProcess : AbstractBuildProbabilityMapProcess
             if (!damaged.isEmpty()) {
                 if (checkDamagedCellsIsolated(damaged, map)) {
                     // Seek around isolated cell
-                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3
+                    cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 5
                 } else {
                     // Find adjacent cells
                     damaged
                             .mapNotNull { map.getCellInDirection(it, cell.determineDirection(it)) }
                             .filter { it.damaged }
-                            .forEach { cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 3 }
+                            .forEach { cell.attackTypeProbability[Code.FIRE_SHOT] = cell.basicProbability * 5 }
                 }
             }
         }
