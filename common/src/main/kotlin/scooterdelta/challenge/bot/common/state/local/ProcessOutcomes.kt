@@ -9,5 +9,5 @@ data class ProcessOutcomes(
         var stateLookup: StateLookup,
         var gameMode: GameMode
 ) {
-    constructor() : this(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
+    constructor() : this(NoActionCommand(), StateLookup.COMMAND, GameMode.SAVE)
 }

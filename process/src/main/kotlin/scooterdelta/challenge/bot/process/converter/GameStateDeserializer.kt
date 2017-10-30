@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.io.Files
 import scooterdelta.challenge.bot.common.lookup.StateLookup
 import scooterdelta.challenge.bot.common.state.game.UserState
+import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import java.io.File
 import java.nio.charset.Charset
@@ -35,7 +36,7 @@ class GameStateDeserializer @Inject constructor(private val objectMapper: Object
             }
             return userState
         }
-        return UserState(mutableListOf())
+        return UserState(mutableListOf(), GameMode.SAVE)
     }
 
     fun deleteUserState() {

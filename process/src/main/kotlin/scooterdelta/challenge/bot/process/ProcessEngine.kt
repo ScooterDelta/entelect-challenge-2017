@@ -33,7 +33,7 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
                         "------------------------------------------\n\n\n")
         try {
             val gameState: GameState = deserializer.deserialize(fileState.workingDirectory)
-            val processOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SEEK)
+            val processOutcomes: ProcessOutcomes
 
             LOGGER.info("Player Map:\n${gameState.playerMap.map.printMap()}")
             LOGGER.info("Opponent Map:\n${gameState.opponentMap.map.printMap()}")
@@ -43,11 +43,15 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
                 1 -> {
                     // Ensure clean slate of user state
                     deserializer.deleteUserState()
-                    userState = UserState(mutableListOf())
+                    processOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SAVE)
+                    userState = UserState(mutableListOf(), processOutcomes.gameMode)
+
                     callPlacementProcess(gameState, processOutcomes)
                 }
                 else -> {
                     userState = deserializer.readUserState()
+                    processOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, userState.gameMode)
+
                     callAttackProcess(gameState, processOutcomes)
                 }
             }
@@ -88,5 +92,6 @@ class ProcessEngine @Inject constructor(private val fileState: FileState,
             val attackCommand = processOutcomes.command as AttackCommand
             userState.attackCommands!!.add(attackCommand)
         }
+        userState.gameMode = processOutcomes.gameMode
     }
 }
