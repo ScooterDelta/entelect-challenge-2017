@@ -9,6 +9,7 @@ import org.junit.Test
 import scooterdelta.challenge.bot.common.command.AttackCommand
 import scooterdelta.challenge.bot.common.lookup.Code
 import scooterdelta.challenge.bot.common.state.game.UserState
+import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.remote.domain.Point
 
 class GameStateDeserializerTest {
@@ -22,7 +23,7 @@ class GameStateDeserializerTest {
 
     @Test
     fun testReadWriteUserState() {
-        val userState = UserState(mutableListOf(AttackCommand(Point(5, 5), Code.FIRE_SHOT)))
+        val userState = UserState(mutableListOf(AttackCommand(Point(5, 5), Code.FIRE_SHOT)), GameMode.SPEND)
 
         gameStateDeserializer.deleteUserState()
         gameStateDeserializer.saveUserState(userState)
@@ -35,7 +36,7 @@ class GameStateDeserializerTest {
 
     @Test
     fun testReadWriteUpdateUserState() {
-        val userState = UserState(mutableListOf(AttackCommand(Point(5, 5), Code.FIRE_SHOT)))
+        val userState = UserState(mutableListOf(AttackCommand(Point(5, 5), Code.FIRE_SHOT)), GameMode.SPEND)
 
         gameStateDeserializer.deleteUserState()
         gameStateDeserializer.saveUserState(userState)

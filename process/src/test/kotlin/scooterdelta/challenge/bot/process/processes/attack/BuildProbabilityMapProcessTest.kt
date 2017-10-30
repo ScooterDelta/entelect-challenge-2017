@@ -6,8 +6,11 @@ import org.junit.Before
 import org.junit.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import scooterdelta.challenge.bot.common.command.NoActionCommand
 import scooterdelta.challenge.bot.common.lookup.Code
 import scooterdelta.challenge.bot.common.lookup.ShipType
+import scooterdelta.challenge.bot.common.lookup.StateLookup
+import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.common.state.remote.OpponentShip
@@ -27,7 +30,7 @@ class BuildProbabilityMapProcessTest {
     @Before
     fun setUp() {
         process = BuildProbabilityMapProcess()
-        processOutcomes = ProcessOutcomes()
+        processOutcomes = ProcessOutcomes(NoActionCommand(), StateLookup.COMMAND, GameMode.SPEND)
     }
 
     @Test

@@ -2,15 +2,16 @@ package scooterdelta.challenge.bot.process.processes.attack
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import scooterdelta.challenge.bot.common.lookup.WeaponType
 import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
 import scooterdelta.challenge.bot.common.state.remote.domain.Weapon
 import scooterdelta.challenge.bot.process.processes.Process
 
-class UpdateGameModeState : Process {
+class UpdateGameModeStateProcess : Process {
 
-    private val logger: Logger = LoggerFactory.getLogger(UpdateGameModeState::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(UpdateGameModeStateProcess::class.java)
 
     override fun process(gameState: GameState, processOutcomes: ProcessOutcomes) {
         val cheapest = extractCheapestWeapon(gameState)
@@ -22,7 +23,7 @@ class UpdateGameModeState : Process {
             processOutcomes.gameMode = GameMode.SPEND
             logger.error("Changing game mode to {} due to weapon extraction error", processOutcomes.gameMode)
         } else {
-            if (expensive.energyRequired * 2 < gameState.playerMap.owner.energy) {
+            if (expensive.energyRequired + cheapest.energyRequired < gameState.playerMap.owner.energy) {
                 processOutcomes.gameMode = GameMode.SPEND
                 logger.info("Setting game mode to {} due to high energy")
             }
@@ -34,14 +35,15 @@ class UpdateGameModeState : Process {
     }
 
     private fun extractCheapestWeapon(gameState: GameState): Weapon? {
-        val weapons: MutableList<Weapon> = mutableListOf()
-        gameState.playerMap.owner.ships.flatMapTo(weapons, { it.weapons })
-        return weapons.minBy { weapon -> weapon.energyRequired }
+        return gameState.playerMap.owner.ships
+                .flatMap { it.weapons }
+                .filterNot { it.weaponType == WeaponType.SINGLE_SHOT }
+                .minBy { weapon -> weapon.energyRequired }
     }
 
     private fun extractExpensiveWeapon(gameState: GameState): Weapon? {
-        val weapons: MutableList<Weapon> = mutableListOf()
-        gameState.playerMap.owner.ships.flatMapTo(weapons, { it.weapons })
-        return weapons.maxBy { weapon -> weapon.energyRequired }
+        return gameState.playerMap.owner.ships
+                .flatMap { it.weapons }
+                .maxBy { weapon -> weapon.energyRequired }
     }
 }

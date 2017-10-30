@@ -60,6 +60,10 @@ class ProcessModule(private val workingDirectory: File,
     fun provideAttackProcesses(): ArrayList<Process> {
         // Ordered list of attack processes
         return arrayListOf(
+                // Update game mode state - SAVE or SPEND.
+                UpdateGameModeStateProcess(),
+
+                // Build basic probability map - SINGLE_SHOT probability
                 BuildProbabilityMapProcess(),
 
                 // RUN HUNT DESTROY - Calculates probabilities while destroying ship

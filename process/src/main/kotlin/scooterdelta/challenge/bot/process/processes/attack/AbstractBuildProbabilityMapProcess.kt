@@ -1,5 +1,6 @@
 package scooterdelta.challenge.bot.process.processes.attack
 
+import scooterdelta.challenge.bot.common.state.local.GameMode
 import scooterdelta.challenge.bot.common.state.local.Map
 import scooterdelta.challenge.bot.common.state.local.ProcessOutcomes
 import scooterdelta.challenge.bot.common.state.remote.GameState
@@ -13,12 +14,15 @@ abstract class AbstractBuildProbabilityMapProcess : Process, ProbabilityCalculat
 
         val opponentMap: Map<OpponentCell> = gameState.opponentMap.map
 
-        opponentMap.cells
-                .parallelStream()
-                .forEach {
-                    it
-                            .parallelStream()
-                            .forEach { calculateProbability(it, gameState, processOutcomes) }
-                }
+        // Only apply probability map processes if the game mode is set to spend
+        if (processOutcomes.gameMode == GameMode.SPEND) {
+            opponentMap.cells
+                    .parallelStream()
+                    .forEach {
+                        it
+                                .parallelStream()
+                                .forEach { calculateProbability(it, gameState, processOutcomes) }
+                    }
+        }
     }
 }
