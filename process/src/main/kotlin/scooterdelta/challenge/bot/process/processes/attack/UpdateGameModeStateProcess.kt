@@ -25,11 +25,11 @@ class UpdateGameModeStateProcess : Process {
         } else {
             if (expensive.energyRequired + cheapest.energyRequired < gameState.playerMap.owner.energy) {
                 processOutcomes.gameMode = GameMode.SPEND
-                logger.info("Setting game mode to {} due to high energy")
+                logger.info("Setting game mode to {} due to high energy", processOutcomes.gameMode)
             }
             if (cheapest.energyRequired > gameState.playerMap.owner.energy) {
                 processOutcomes.gameMode = GameMode.SAVE
-                logger.info("Setting game mode to {} due to low energy")
+                logger.info("Setting game mode to {} due to low energy", processOutcomes.gameMode)
             }
         }
     }
