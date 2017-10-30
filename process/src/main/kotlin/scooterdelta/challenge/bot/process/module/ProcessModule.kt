@@ -75,6 +75,9 @@ class ProcessModule(private val workingDirectory: File,
                 // Calculate special weapon probabilities
                 SpecialWeaponProbabilityMapProcess(provideProbabilityCalculators()),
 
+                // Calculate shield probability
+                ShieldDefenceProbabilityCalculator(),
+
                 // Select most likely weapon/location choice
                 SelectAttackCommandProcess(Random())
         )
