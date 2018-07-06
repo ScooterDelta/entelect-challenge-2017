@@ -1,5 +1,7 @@
 # Entelect Challenge BOT - Written in Kotlin.
 
+[![CircleCI](https://circleci.com/gh/ScooterDelta/entelect-challenge-2017.svg?style=svg)](https://circleci.com/gh/ScooterDelta/entelect-challenge-2017)
+
 - Using Dagger 2 dependency injection framework.
 - Written by Anthony Farquharson.
 
